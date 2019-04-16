@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -123,22 +124,24 @@ func parseICMPEcho(b []byte) (*icmpEcho, error) {
 	return p, nil
 }
 
-func Ping(address string, timeout int) (alive bool) {
-	err := Pinger(address, timeout)
-	alive = err == nil
-	return
-}
-
-func Pinger(address string, timeout int) (err error) {
-	c, err := net.Dial("ip4:icmp", address)
+func Ping(address string) int64 {
+	var c net.Conn
+	var err error
+	if strings.Contains(address, ":") {
+		c, err = net.Dial("ip6:ipv6-icmp", address)
+		typ := icmpv6EchoRequest
+	} else {
+		c, err = net.Dial("ip4:icmp", address)
+		typ := icmpv4EchoRequest
+	}
 	if err != nil {
 		fmt.Println(err)
-		return
+		return 0
 	}
-	c.SetDeadline(time.Now().Add(time.Duration(timeout) * time.Second))
+
+	c.SetDeadline(time.Now().Add(time.Duration(2) * time.Second))
 	defer c.Close()
 
-	typ := icmpv4EchoRequest
 	xid, xseq := os.Getpid()&0xffff, 1
 	wb, err := (&icmpMessage{
 		Type: typ, Code: 0,

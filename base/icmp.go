@@ -1,19 +1,11 @@
-// Copyright 2009 The Go Authors.  All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// taken from http://golang.org/src/pkg/net/ipraw_test.go
-
-//20131204,尝试改造支持ipv6
-
-package main
+package base
 
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"net"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -36,8 +28,7 @@ type icmpMessageBody interface {
 	Marshal() ([]byte, error)
 }
 
-// Marshal returns the binary enconding of the ICMP echo request or
-// reply message m.
+// Marshal返回ICMP echo请求应答消息m的二进制编码。
 func (m *icmpMessage) Marshal() ([]byte, error) {
 	b := []byte{byte(m.Type), byte(m.Code), 0, 0}
 	if m.Body != nil && m.Body.Len() != 0 {
@@ -68,7 +59,7 @@ func (m *icmpMessage) Marshal() ([]byte, error) {
 	return b, nil
 }
 
-// parseICMPMessage parses b as an ICMP message.
+// parseICMPMessage将b解析为ICMP消息
 func parseICMPMessage(b []byte) (*icmpMessage, error) {
 	msglen := len(b)
 	if msglen < 4 {
@@ -88,7 +79,7 @@ func parseICMPMessage(b []byte) (*icmpMessage, error) {
 	return m, nil
 }
 
-// imcpEcho represenets an ICMP echo request or reply message body.
+// imcpEcho表示ICMP回应请求或回复消息正文。
 type icmpEcho struct {
 	ID   int    // identifier
 	Seq  int    // sequence number
@@ -102,8 +93,7 @@ func (p *icmpEcho) Len() int {
 	return 4 + len(p.Data)
 }
 
-// Marshal returns the binary enconding of the ICMP echo request or
-// reply message body p.
+// Marshal返回ICMP回应请求或回复消息正文p的二进制编码
 func (p *icmpEcho) Marshal() ([]byte, error) {
 	b := make([]byte, 4+len(p.Data))
 	b[0], b[1] = byte(p.ID>>8), byte(p.ID&0xff)
@@ -112,7 +102,7 @@ func (p *icmpEcho) Marshal() ([]byte, error) {
 	return b, nil
 }
 
-// parseICMPEcho parses b as an ICMP echo request or reply message body.
+// parseICMPEcho将b解析为ICMP echo请求或回复消息体
 func parseICMPEcho(b []byte) (*icmpEcho, error) {
 	bodylen := len(b)
 	p := &icmpEcho{ID: int(b[0])<<8 | int(b[1]), Seq: int(b[2])<<8 | int(b[3])}
@@ -123,27 +113,29 @@ func parseICMPEcho(b []byte) (*icmpEcho, error) {
 	return p, nil
 }
 
-func Ping(address string, timeout int) (alive bool, err error, timedelay int64) {
-	t1 := time.Now().UnixNano()
-	err = Pinger(address, timeout)
-	t2 := time.Now().UnixNano()
-	alive = err == nil
-	return alive, err, t2 - t1
-}
+func Ping(address string) int64 {
+	var (
+		typ    int
+		c      net.Conn
+		err    error
+		isipv4 bool
+	)
 
-func Pinger(address string, timeout int) (err error) {
-	//c, err := net.Dial("ip4:icmp", address)
-	c, err := net.Dial("ip6:ipv6-icmp", address)
+	if strings.Contains(address, ":") {
+		c, err = net.Dial("ip6:ipv6-icmp", address)
+		typ = icmpv6EchoRequest
+	} else {
+		c, err = net.Dial("ip4:icmp", address)
+		typ = icmpv4EchoRequest
+		isipv4 = true
+	}
 	if err != nil {
-		fmt.Println("error ", err)
-		return
+		return 0
 	}
 
-	c.SetDeadline(time.Now().Add(time.Duration(timeout) * time.Millisecond)) //时延ms单位
+	c.SetDeadline(time.Now().Add(time.Duration(2) * time.Second))
 	defer c.Close()
 
-	//typ := icmpv4EchoRequest
-	typ := icmpv6EchoRequest
 	xid, xseq := os.Getpid()&0xffff, 1
 	wb, err := (&icmpMessage{
 		Type: typ, Code: 0,
@@ -153,33 +145,32 @@ func Pinger(address string, timeout int) (err error) {
 		},
 	}).Marshal()
 	if err != nil {
-		return
+		return 0
 	}
+
+	t := time.Now()
 	if _, err = c.Write(wb); err != nil {
-		return
+		return 0
 	}
 	var m *icmpMessage
 	rb := make([]byte, 20+len(wb))
 	for {
 		if _, err = c.Read(rb); err != nil {
-			return
+			return 0
 		}
-
-		//if net == "ip4" {  //only for ipv4
-		//	rb = ipv4Payload(rb)
-		//}
-
+		if isipv4 {
+			rb = ipv4Payload(rb)
+		}
 		if m, err = parseICMPMessage(rb); err != nil {
-			return
+			return 0
 		}
 		switch m.Type {
 		case icmpv4EchoRequest, icmpv6EchoRequest:
-			//fmt.Println("type ",m.Type)
 			continue
 		}
 		break
 	}
-	return
+	return time.Since(t).Nanoseconds() / 1000
 }
 
 func ipv4Payload(b []byte) []byte {
@@ -187,12 +178,5 @@ func ipv4Payload(b []byte) []byte {
 		return b
 	}
 	hdrlen := int(b[0]&0x0f) << 2
-	fmt.Println("hdrlen ", hdrlen) //ipv4的时候为20
 	return b[hdrlen:]
-}
-
-func main() {
-	//fmt.Println(Ping("1.1.8.8", 1))
-	fmt.Println(Ping("fe80::225:90ff:fec0:1745%eth1", 3))
-	//fmt.Println(Ping("2001:4860:4860::8888", 3))
 }
