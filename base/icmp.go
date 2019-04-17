@@ -113,6 +113,7 @@ func parseICMPEcho(b []byte) (*icmpEcho, error) {
 	return p, nil
 }
 
+// ping 支持ipv4 ipv6
 func Ping(address string) int64 {
 	var (
 		typ    int
