@@ -1,8 +1,15 @@
-package base
+// Copyright 2009 The Go Authors.  All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// taken from http://golang.org/src/pkg/net/ipraw_test.go
+
+package main
 
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"net"
 	"os"
 	"strings"
@@ -28,12 +35,14 @@ type icmpMessageBody interface {
 	Marshal() ([]byte, error)
 }
 
-// Marshal返回ICMP echo请求应答消息m的二进制编码。
+// Marshal returns the binary enconding of the ICMP echo request or
+// reply message m.
 func (m *icmpMessage) Marshal() ([]byte, error) {
 	b := []byte{byte(m.Type), byte(m.Code), 0, 0}
 	if m.Body != nil && m.Body.Len() != 0 {
 		mb, err := m.Body.Marshal()
 		if err != nil {
+			fmt.Println(err)
 			return nil, err
 		}
 		b = append(b, mb...)
@@ -59,7 +68,7 @@ func (m *icmpMessage) Marshal() ([]byte, error) {
 	return b, nil
 }
 
-// parseICMPMessage将b解析为ICMP消息
+// parseICMPMessage parses b as an ICMP message.
 func parseICMPMessage(b []byte) (*icmpMessage, error) {
 	msglen := len(b)
 	if msglen < 4 {
@@ -72,6 +81,7 @@ func parseICMPMessage(b []byte) (*icmpMessage, error) {
 		case icmpv4EchoRequest, icmpv4EchoReply, icmpv6EchoRequest, icmpv6EchoReply:
 			m.Body, err = parseICMPEcho(b[4:])
 			if err != nil {
+				fmt.Println(err)
 				return nil, err
 			}
 		}
@@ -79,7 +89,7 @@ func parseICMPMessage(b []byte) (*icmpMessage, error) {
 	return m, nil
 }
 
-// imcpEcho表示ICMP回应请求或回复消息正文。
+// imcpEcho represenets an ICMP echo request or reply message body.
 type icmpEcho struct {
 	ID   int    // identifier
 	Seq  int    // sequence number
@@ -93,7 +103,8 @@ func (p *icmpEcho) Len() int {
 	return 4 + len(p.Data)
 }
 
-// Marshal返回ICMP回应请求或回复消息正文p的二进制编码
+// Marshal returns the binary enconding of the ICMP echo request or
+// reply message body p.
 func (p *icmpEcho) Marshal() ([]byte, error) {
 	b := make([]byte, 4+len(p.Data))
 	b[0], b[1] = byte(p.ID>>8), byte(p.ID&0xff)
@@ -102,7 +113,7 @@ func (p *icmpEcho) Marshal() ([]byte, error) {
 	return b, nil
 }
 
-// parseICMPEcho将b解析为ICMP echo请求或回复消息体
+// parseICMPEcho parses b as an ICMP echo request or reply message body.
 func parseICMPEcho(b []byte) (*icmpEcho, error) {
 	bodylen := len(b)
 	p := &icmpEcho{ID: int(b[0])<<8 | int(b[1]), Seq: int(b[2])<<8 | int(b[3])}
@@ -113,25 +124,18 @@ func parseICMPEcho(b []byte) (*icmpEcho, error) {
 	return p, nil
 }
 
-// ping 支持ipv4 ipv6
 func Ping(address string) int64 {
-	var (
-		typ    int
-		c      net.Conn
-		err    error
-		isipv4 bool
-	)
-
+	var c net.Conn
+	var err error
 	if strings.Contains(address, ":") {
 		c, err = net.Dial("ip6:ipv6-icmp", address)
-		typ = icmpv6EchoRequest
+		typ := icmpv6EchoRequest
 	} else {
 		c, err = net.Dial("ip4:icmp", address)
-		typ = icmpv4EchoRequest
-		isipv4 = true
+		typ := icmpv4EchoRequest
 	}
 	if err != nil {
-		//fmt.Println(err)
+		fmt.Println(err)
 		return 0
 	}
 
@@ -147,24 +151,24 @@ func Ping(address string) int64 {
 		},
 	}).Marshal()
 	if err != nil {
-		return 0
+		fmt.Println(err)
+		return
 	}
-
-	t := time.Now()
 	if _, err = c.Write(wb); err != nil {
-		return 0
+		fmt.Println(err)
+		return
 	}
 	var m *icmpMessage
 	rb := make([]byte, 20+len(wb))
 	for {
 		if _, err = c.Read(rb); err != nil {
-			return 0
+			fmt.Println(err)
+			return
 		}
-		if isipv4 {
-			rb = ipv4Payload(rb)
-		}
+		rb = ipv4Payload(rb)
 		if m, err = parseICMPMessage(rb); err != nil {
-			return 0
+			fmt.Println(err)
+			return
 		}
 		switch m.Type {
 		case icmpv4EchoRequest, icmpv6EchoRequest:
@@ -172,7 +176,7 @@ func Ping(address string) int64 {
 		}
 		break
 	}
-	return time.Since(t).Nanoseconds() / 1000
+	return
 }
 
 func ipv4Payload(b []byte) []byte {
@@ -181,4 +185,9 @@ func ipv4Payload(b []byte) []byte {
 	}
 	hdrlen := int(b[0]&0x0f) << 2
 	return b[hdrlen:]
+}
+
+func main() {
+	//fmt.Println(Ping("1.1.8.8", 1))
+	fmt.Println(Ping("1.2.3.4", 3))
 }
