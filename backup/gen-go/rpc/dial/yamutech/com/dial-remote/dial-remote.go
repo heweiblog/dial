@@ -44,6 +44,16 @@ func Usage() {
 	fmt.Fprintln(os.Stderr, "  RetCode delIpSec(string ipsecid)")
 	fmt.Fprintln(os.Stderr, "  RetCode addDcInfo(DcInfo dc)")
 	fmt.Fprintln(os.Stderr, "  RetCode delDcInfo(string id)")
+	fmt.Fprintln(os.Stderr, "  RetCode heartBeatDial()")
+	fmt.Fprintln(os.Stderr, "  RetCode resetModule()")
+	fmt.Fprintln(os.Stderr, "  RetCode addDialIpSec( ipSecList)")
+	fmt.Fprintln(os.Stderr, "  RetCode removeDialIpSec( ipSecList)")
+	fmt.Fprintln(os.Stderr, "  RetCode clearDialPlatformIpSec()")
+	fmt.Fprintln(os.Stderr, "  RetCode addDialDomain(string groupId,  DomainList)")
+	fmt.Fprintln(os.Stderr, "  RetCode removeDialDomain(string groupId,  DomainList)")
+	fmt.Fprintln(os.Stderr, "  RetCode clearDialDomain(string groupId)")
+	fmt.Fprintln(os.Stderr, "  RetCode addDialTask(string taskId, DialMethod method,  targetList, IpAddr sourceip, i32 interval, string domainGroupId)")
+	fmt.Fprintln(os.Stderr, "  RetCode removeDialTask(string taskId)")
 	fmt.Fprintln(os.Stderr)
 	os.Exit(0)
 }
@@ -184,19 +194,19 @@ func main() {
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
-		arg181 := flag.Arg(2)
-		mbTrans182 := thrift.NewTMemoryBufferLen(len(arg181))
-		defer mbTrans182.Close()
-		_, err183 := mbTrans182.WriteString(arg181)
-		if err183 != nil {
+		arg227 := flag.Arg(2)
+		mbTrans228 := thrift.NewTMemoryBufferLen(len(arg227))
+		defer mbTrans228.Close()
+		_, err229 := mbTrans228.WriteString(arg227)
+		if err229 != nil {
 			Usage()
 			return
 		}
-		factory184 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt185 := factory184.GetProtocol(mbTrans182)
+		factory230 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt231 := factory230.GetProtocol(mbTrans228)
 		containerStruct1 := com.NewDialAddHealthRecordArgs()
-		err186 := containerStruct1.ReadField2(jsProt185)
-		if err186 != nil {
+		err232 := containerStruct1.ReadField2(jsProt231)
+		if err232 != nil {
 			Usage()
 			return
 		}
@@ -212,19 +222,19 @@ func main() {
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
-		arg188 := flag.Arg(2)
-		mbTrans189 := thrift.NewTMemoryBufferLen(len(arg188))
-		defer mbTrans189.Close()
-		_, err190 := mbTrans189.WriteString(arg188)
-		if err190 != nil {
+		arg234 := flag.Arg(2)
+		mbTrans235 := thrift.NewTMemoryBufferLen(len(arg234))
+		defer mbTrans235.Close()
+		_, err236 := mbTrans235.WriteString(arg234)
+		if err236 != nil {
 			Usage()
 			return
 		}
-		factory191 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt192 := factory191.GetProtocol(mbTrans189)
+		factory237 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt238 := factory237.GetProtocol(mbTrans235)
 		containerStruct1 := com.NewDialDelHealthRecordArgs()
-		err193 := containerStruct1.ReadField2(jsProt192)
-		if err193 != nil {
+		err239 := containerStruct1.ReadField2(jsProt238)
+		if err239 != nil {
 			Usage()
 			return
 		}
@@ -238,19 +248,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, "AddHealthPolicy requires 1 args")
 			flag.Usage()
 		}
-		arg194 := flag.Arg(1)
-		mbTrans195 := thrift.NewTMemoryBufferLen(len(arg194))
-		defer mbTrans195.Close()
-		_, err196 := mbTrans195.WriteString(arg194)
-		if err196 != nil {
+		arg240 := flag.Arg(1)
+		mbTrans241 := thrift.NewTMemoryBufferLen(len(arg240))
+		defer mbTrans241.Close()
+		_, err242 := mbTrans241.WriteString(arg240)
+		if err242 != nil {
 			Usage()
 			return
 		}
-		factory197 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt198 := factory197.GetProtocol(mbTrans195)
+		factory243 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt244 := factory243.GetProtocol(mbTrans241)
 		argvalue0 := com.NewHealthPolicyInfo()
-		err199 := argvalue0.Read(jsProt198)
-		if err199 != nil {
+		err245 := argvalue0.Read(jsProt244)
+		if err245 != nil {
 			Usage()
 			return
 		}
@@ -263,19 +273,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, "ModHealthPolicy requires 1 args")
 			flag.Usage()
 		}
-		arg200 := flag.Arg(1)
-		mbTrans201 := thrift.NewTMemoryBufferLen(len(arg200))
-		defer mbTrans201.Close()
-		_, err202 := mbTrans201.WriteString(arg200)
-		if err202 != nil {
+		arg246 := flag.Arg(1)
+		mbTrans247 := thrift.NewTMemoryBufferLen(len(arg246))
+		defer mbTrans247.Close()
+		_, err248 := mbTrans247.WriteString(arg246)
+		if err248 != nil {
 			Usage()
 			return
 		}
-		factory203 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt204 := factory203.GetProtocol(mbTrans201)
+		factory249 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt250 := factory249.GetProtocol(mbTrans247)
 		argvalue0 := com.NewHealthPolicyInfo()
-		err205 := argvalue0.Read(jsProt204)
-		if err205 != nil {
+		err251 := argvalue0.Read(jsProt250)
+		if err251 != nil {
 			Usage()
 			return
 		}
@@ -288,19 +298,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, "DelHealthPolicy requires 1 args")
 			flag.Usage()
 		}
-		arg206 := flag.Arg(1)
-		mbTrans207 := thrift.NewTMemoryBufferLen(len(arg206))
-		defer mbTrans207.Close()
-		_, err208 := mbTrans207.WriteString(arg206)
-		if err208 != nil {
+		arg252 := flag.Arg(1)
+		mbTrans253 := thrift.NewTMemoryBufferLen(len(arg252))
+		defer mbTrans253.Close()
+		_, err254 := mbTrans253.WriteString(arg252)
+		if err254 != nil {
 			Usage()
 			return
 		}
-		factory209 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt210 := factory209.GetProtocol(mbTrans207)
+		factory255 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt256 := factory255.GetProtocol(mbTrans253)
 		argvalue0 := com.NewHealthPolicyInfo()
-		err211 := argvalue0.Read(jsProt210)
-		if err211 != nil {
+		err257 := argvalue0.Read(jsProt256)
+		if err257 != nil {
 			Usage()
 			return
 		}
@@ -315,19 +325,19 @@ func main() {
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := com.ObjectId(argvalue0)
-		arg213 := flag.Arg(2)
-		mbTrans214 := thrift.NewTMemoryBufferLen(len(arg213))
-		defer mbTrans214.Close()
-		_, err215 := mbTrans214.WriteString(arg213)
-		if err215 != nil {
+		arg259 := flag.Arg(2)
+		mbTrans260 := thrift.NewTMemoryBufferLen(len(arg259))
+		defer mbTrans260.Close()
+		_, err261 := mbTrans260.WriteString(arg259)
+		if err261 != nil {
 			Usage()
 			return
 		}
-		factory216 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt217 := factory216.GetProtocol(mbTrans214)
+		factory262 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt263 := factory262.GetProtocol(mbTrans260)
 		argvalue1 := com.NewIpAddr()
-		err218 := argvalue1.Read(jsProt217)
-		if err218 != nil {
+		err264 := argvalue1.Read(jsProt263)
+		if err264 != nil {
 			Usage()
 			return
 		}
@@ -383,19 +393,19 @@ func main() {
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
-		arg225 := flag.Arg(2)
-		mbTrans226 := thrift.NewTMemoryBufferLen(len(arg225))
-		defer mbTrans226.Close()
-		_, err227 := mbTrans226.WriteString(arg225)
-		if err227 != nil {
+		arg271 := flag.Arg(2)
+		mbTrans272 := thrift.NewTMemoryBufferLen(len(arg271))
+		defer mbTrans272.Close()
+		_, err273 := mbTrans272.WriteString(arg271)
+		if err273 != nil {
 			Usage()
 			return
 		}
-		factory228 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt229 := factory228.GetProtocol(mbTrans226)
+		factory274 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt275 := factory274.GetProtocol(mbTrans272)
 		containerStruct1 := com.NewDialAddNginxServerArgs()
-		err230 := containerStruct1.ReadField2(jsProt229)
-		if err230 != nil {
+		err276 := containerStruct1.ReadField2(jsProt275)
+		if err276 != nil {
 			Usage()
 			return
 		}
@@ -411,19 +421,19 @@ func main() {
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
-		arg232 := flag.Arg(2)
-		mbTrans233 := thrift.NewTMemoryBufferLen(len(arg232))
-		defer mbTrans233.Close()
-		_, err234 := mbTrans233.WriteString(arg232)
-		if err234 != nil {
+		arg278 := flag.Arg(2)
+		mbTrans279 := thrift.NewTMemoryBufferLen(len(arg278))
+		defer mbTrans279.Close()
+		_, err280 := mbTrans279.WriteString(arg278)
+		if err280 != nil {
 			Usage()
 			return
 		}
-		factory235 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt236 := factory235.GetProtocol(mbTrans233)
+		factory281 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt282 := factory281.GetProtocol(mbTrans279)
 		containerStruct1 := com.NewDialDelNginxServerArgs()
-		err237 := containerStruct1.ReadField2(jsProt236)
-		if err237 != nil {
+		err283 := containerStruct1.ReadField2(jsProt282)
+		if err283 != nil {
 			Usage()
 			return
 		}
@@ -455,19 +465,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, "AddSnmpGroupInfo requires 1 args")
 			flag.Usage()
 		}
-		arg239 := flag.Arg(1)
-		mbTrans240 := thrift.NewTMemoryBufferLen(len(arg239))
-		defer mbTrans240.Close()
-		_, err241 := mbTrans240.WriteString(arg239)
-		if err241 != nil {
+		arg285 := flag.Arg(1)
+		mbTrans286 := thrift.NewTMemoryBufferLen(len(arg285))
+		defer mbTrans286.Close()
+		_, err287 := mbTrans286.WriteString(arg285)
+		if err287 != nil {
 			Usage()
 			return
 		}
-		factory242 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt243 := factory242.GetProtocol(mbTrans240)
+		factory288 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt289 := factory288.GetProtocol(mbTrans286)
 		argvalue0 := com.NewSnmpGroupInfo()
-		err244 := argvalue0.Read(jsProt243)
-		if err244 != nil {
+		err290 := argvalue0.Read(jsProt289)
+		if err290 != nil {
 			Usage()
 			return
 		}
@@ -514,25 +524,25 @@ func main() {
 			fmt.Fprintln(os.Stderr, "AddIpSec requires 2 args")
 			flag.Usage()
 		}
-		arg250 := flag.Arg(1)
-		mbTrans251 := thrift.NewTMemoryBufferLen(len(arg250))
-		defer mbTrans251.Close()
-		_, err252 := mbTrans251.WriteString(arg250)
-		if err252 != nil {
+		arg296 := flag.Arg(1)
+		mbTrans297 := thrift.NewTMemoryBufferLen(len(arg296))
+		defer mbTrans297.Close()
+		_, err298 := mbTrans297.WriteString(arg296)
+		if err298 != nil {
 			Usage()
 			return
 		}
-		factory253 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt254 := factory253.GetProtocol(mbTrans251)
+		factory299 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt300 := factory299.GetProtocol(mbTrans297)
 		argvalue0 := com.NewSysIpSec()
-		err255 := argvalue0.Read(jsProt254)
-		if err255 != nil {
+		err301 := argvalue0.Read(jsProt300)
+		if err301 != nil {
 			Usage()
 			return
 		}
 		value0 := argvalue0
-		tmp1, err256 := (strconv.Atoi(flag.Arg(2)))
-		if err256 != nil {
+		tmp1, err302 := (strconv.Atoi(flag.Arg(2)))
+		if err302 != nil {
 			Usage()
 			return
 		}
@@ -556,19 +566,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, "AddDcInfo requires 1 args")
 			flag.Usage()
 		}
-		arg258 := flag.Arg(1)
-		mbTrans259 := thrift.NewTMemoryBufferLen(len(arg258))
-		defer mbTrans259.Close()
-		_, err260 := mbTrans259.WriteString(arg258)
-		if err260 != nil {
+		arg304 := flag.Arg(1)
+		mbTrans305 := thrift.NewTMemoryBufferLen(len(arg304))
+		defer mbTrans305.Close()
+		_, err306 := mbTrans305.WriteString(arg304)
+		if err306 != nil {
 			Usage()
 			return
 		}
-		factory261 := thrift.NewTSimpleJSONProtocolFactory()
-		jsProt262 := factory261.GetProtocol(mbTrans259)
+		factory307 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt308 := factory307.GetProtocol(mbTrans305)
 		argvalue0 := com.NewDcInfo()
-		err263 := argvalue0.Read(jsProt262)
-		if err263 != nil {
+		err309 := argvalue0.Read(jsProt308)
+		if err309 != nil {
 			Usage()
 			return
 		}
@@ -584,6 +594,219 @@ func main() {
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
 		fmt.Print(client.DelDcInfo(value0))
+		fmt.Print("\n")
+		break
+	case "heartBeatDial":
+		if flag.NArg()-1 != 0 {
+			fmt.Fprintln(os.Stderr, "HeartBeatDial requires 0 args")
+			flag.Usage()
+		}
+		fmt.Print(client.HeartBeatDial())
+		fmt.Print("\n")
+		break
+	case "resetModule":
+		if flag.NArg()-1 != 0 {
+			fmt.Fprintln(os.Stderr, "ResetModule requires 0 args")
+			flag.Usage()
+		}
+		fmt.Print(client.ResetModule())
+		fmt.Print("\n")
+		break
+	case "addDialIpSec":
+		if flag.NArg()-1 != 1 {
+			fmt.Fprintln(os.Stderr, "AddDialIpSec requires 1 args")
+			flag.Usage()
+		}
+		arg311 := flag.Arg(1)
+		mbTrans312 := thrift.NewTMemoryBufferLen(len(arg311))
+		defer mbTrans312.Close()
+		_, err313 := mbTrans312.WriteString(arg311)
+		if err313 != nil {
+			Usage()
+			return
+		}
+		factory314 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt315 := factory314.GetProtocol(mbTrans312)
+		containerStruct0 := com.NewDialAddDialIpSecArgs()
+		err316 := containerStruct0.ReadField1(jsProt315)
+		if err316 != nil {
+			Usage()
+			return
+		}
+		argvalue0 := containerStruct0.IpSecList
+		value0 := argvalue0
+		fmt.Print(client.AddDialIpSec(value0))
+		fmt.Print("\n")
+		break
+	case "removeDialIpSec":
+		if flag.NArg()-1 != 1 {
+			fmt.Fprintln(os.Stderr, "RemoveDialIpSec requires 1 args")
+			flag.Usage()
+		}
+		arg317 := flag.Arg(1)
+		mbTrans318 := thrift.NewTMemoryBufferLen(len(arg317))
+		defer mbTrans318.Close()
+		_, err319 := mbTrans318.WriteString(arg317)
+		if err319 != nil {
+			Usage()
+			return
+		}
+		factory320 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt321 := factory320.GetProtocol(mbTrans318)
+		containerStruct0 := com.NewDialRemoveDialIpSecArgs()
+		err322 := containerStruct0.ReadField1(jsProt321)
+		if err322 != nil {
+			Usage()
+			return
+		}
+		argvalue0 := containerStruct0.IpSecList
+		value0 := argvalue0
+		fmt.Print(client.RemoveDialIpSec(value0))
+		fmt.Print("\n")
+		break
+	case "clearDialPlatformIpSec":
+		if flag.NArg()-1 != 0 {
+			fmt.Fprintln(os.Stderr, "ClearDialPlatformIpSec requires 0 args")
+			flag.Usage()
+		}
+		fmt.Print(client.ClearDialPlatformIpSec())
+		fmt.Print("\n")
+		break
+	case "addDialDomain":
+		if flag.NArg()-1 != 2 {
+			fmt.Fprintln(os.Stderr, "AddDialDomain requires 2 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		arg324 := flag.Arg(2)
+		mbTrans325 := thrift.NewTMemoryBufferLen(len(arg324))
+		defer mbTrans325.Close()
+		_, err326 := mbTrans325.WriteString(arg324)
+		if err326 != nil {
+			Usage()
+			return
+		}
+		factory327 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt328 := factory327.GetProtocol(mbTrans325)
+		containerStruct1 := com.NewDialAddDialDomainArgs()
+		err329 := containerStruct1.ReadField2(jsProt328)
+		if err329 != nil {
+			Usage()
+			return
+		}
+		argvalue1 := containerStruct1.DomainList
+		value1 := argvalue1
+		fmt.Print(client.AddDialDomain(value0, value1))
+		fmt.Print("\n")
+		break
+	case "removeDialDomain":
+		if flag.NArg()-1 != 2 {
+			fmt.Fprintln(os.Stderr, "RemoveDialDomain requires 2 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		arg331 := flag.Arg(2)
+		mbTrans332 := thrift.NewTMemoryBufferLen(len(arg331))
+		defer mbTrans332.Close()
+		_, err333 := mbTrans332.WriteString(arg331)
+		if err333 != nil {
+			Usage()
+			return
+		}
+		factory334 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt335 := factory334.GetProtocol(mbTrans332)
+		containerStruct1 := com.NewDialRemoveDialDomainArgs()
+		err336 := containerStruct1.ReadField2(jsProt335)
+		if err336 != nil {
+			Usage()
+			return
+		}
+		argvalue1 := containerStruct1.DomainList
+		value1 := argvalue1
+		fmt.Print(client.RemoveDialDomain(value0, value1))
+		fmt.Print("\n")
+		break
+	case "clearDialDomain":
+		if flag.NArg()-1 != 1 {
+			fmt.Fprintln(os.Stderr, "ClearDialDomain requires 1 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		fmt.Print(client.ClearDialDomain(value0))
+		fmt.Print("\n")
+		break
+	case "addDialTask":
+		if flag.NArg()-1 != 6 {
+			fmt.Fprintln(os.Stderr, "AddDialTask requires 6 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		tmp1, err := (strconv.Atoi(flag.Arg(2)))
+		if err != nil {
+			Usage()
+			return
+		}
+		argvalue1 := com.DialMethod(tmp1)
+		value1 := argvalue1
+		arg339 := flag.Arg(3)
+		mbTrans340 := thrift.NewTMemoryBufferLen(len(arg339))
+		defer mbTrans340.Close()
+		_, err341 := mbTrans340.WriteString(arg339)
+		if err341 != nil {
+			Usage()
+			return
+		}
+		factory342 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt343 := factory342.GetProtocol(mbTrans340)
+		containerStruct2 := com.NewDialAddDialTaskArgs()
+		err344 := containerStruct2.ReadField3(jsProt343)
+		if err344 != nil {
+			Usage()
+			return
+		}
+		argvalue2 := containerStruct2.TargetList
+		value2 := argvalue2
+		arg345 := flag.Arg(4)
+		mbTrans346 := thrift.NewTMemoryBufferLen(len(arg345))
+		defer mbTrans346.Close()
+		_, err347 := mbTrans346.WriteString(arg345)
+		if err347 != nil {
+			Usage()
+			return
+		}
+		factory348 := thrift.NewTSimpleJSONProtocolFactory()
+		jsProt349 := factory348.GetProtocol(mbTrans346)
+		argvalue3 := com.NewIpAddr()
+		err350 := argvalue3.Read(jsProt349)
+		if err350 != nil {
+			Usage()
+			return
+		}
+		value3 := argvalue3
+		tmp4, err351 := (strconv.Atoi(flag.Arg(5)))
+		if err351 != nil {
+			Usage()
+			return
+		}
+		argvalue4 := int32(tmp4)
+		value4 := argvalue4
+		argvalue5 := flag.Arg(6)
+		value5 := argvalue5
+		fmt.Print(client.AddDialTask(value0, value1, value2, value3, value4, value5))
+		fmt.Print("\n")
+		break
+	case "removeDialTask":
+		if flag.NArg()-1 != 1 {
+			fmt.Fprintln(os.Stderr, "RemoveDialTask requires 1 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		fmt.Print(client.RemoveDialTask(value0))
 		fmt.Print("\n")
 		break
 	case "":

@@ -98,37 +98,6 @@ type Dial interface {
 	// Parameters:
 	//  - ID
 	DelDcInfo(id string) (r RetCode, err error)
-	HeartBeatDial() (r RetCode, err error)
-	ResetModule() (r RetCode, err error)
-	// Parameters:
-	//  - IpSecList
-	AddDialIpSec(ipSecList []*IpSec) (r RetCode, err error)
-	// Parameters:
-	//  - IpSecList
-	RemoveDialIpSec(ipSecList []*IpSec) (r RetCode, err error)
-	ClearDialPlatformIpSec() (r RetCode, err error)
-	// Parameters:
-	//  - GroupId
-	//  - DomainList
-	AddDialDomain(groupId string, DomainList []*DomainRecord) (r RetCode, err error)
-	// Parameters:
-	//  - GroupId
-	//  - DomainList
-	RemoveDialDomain(groupId string, DomainList []*DomainRecord) (r RetCode, err error)
-	// Parameters:
-	//  - GroupId
-	ClearDialDomain(groupId string) (r RetCode, err error)
-	// Parameters:
-	//  - TaskId
-	//  - Method
-	//  - TargetList
-	//  - Sourceip
-	//  - Interval
-	//  - DomainGroupId
-	AddDialTask(taskId string, method DialMethod, targetList []*IpAddr, sourceip *IpAddr, interval int32, domainGroupId string) (r RetCode, err error)
-	// Parameters:
-	//  - TaskId
-	RemoveDialTask(taskId string) (r RetCode, err error)
 }
 
 type DialClient struct {
@@ -207,16 +176,16 @@ func (p *DialClient) recvSystemCommand() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error143 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error144 error
-		error144, err = error143.Read(iprot)
+		error122 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error123 error
+		error123, err = error122.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error144
+		err = error123
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -290,16 +259,16 @@ func (p *DialClient) recvAddHealthGroup() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error145 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error146 error
-		error146, err = error145.Read(iprot)
+		error124 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error125 error
+		error125, err = error124.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error146
+		err = error125
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -373,16 +342,16 @@ func (p *DialClient) recvDelHealthGroup() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error147 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error148 error
-		error148, err = error147.Read(iprot)
+		error126 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error127 error
+		error127, err = error126.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error148
+		err = error127
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -456,16 +425,16 @@ func (p *DialClient) recvAddHealthRecord() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error149 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error150 error
-		error150, err = error149.Read(iprot)
+		error128 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error129 error
+		error129, err = error128.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error150
+		err = error129
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -539,16 +508,16 @@ func (p *DialClient) recvDelHealthRecord() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error151 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error152 error
-		error152, err = error151.Read(iprot)
+		error130 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error131 error
+		error131, err = error130.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error152
+		err = error131
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -620,16 +589,16 @@ func (p *DialClient) recvAddHealthPolicy() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error153 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error154 error
-		error154, err = error153.Read(iprot)
+		error132 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error133 error
+		error133, err = error132.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error154
+		err = error133
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -701,16 +670,16 @@ func (p *DialClient) recvModHealthPolicy() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error155 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error156 error
-		error156, err = error155.Read(iprot)
+		error134 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error135 error
+		error135, err = error134.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error156
+		err = error135
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -782,16 +751,16 @@ func (p *DialClient) recvDelHealthPolicy() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error157 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error158 error
-		error158, err = error157.Read(iprot)
+		error136 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error137 error
+		error137, err = error136.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error158
+		err = error137
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -867,16 +836,16 @@ func (p *DialClient) recvAddDialServer() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error159 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error160 error
-		error160, err = error159.Read(iprot)
+		error138 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error139 error
+		error139, err = error138.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error160
+		err = error139
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -948,16 +917,16 @@ func (p *DialClient) recvDelDialServer() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error161 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error162 error
-		error162, err = error161.Read(iprot)
+		error140 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error141 error
+		error141, err = error140.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error162
+		err = error141
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1031,16 +1000,16 @@ func (p *DialClient) recvAddNginxGroup() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error163 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error164 error
-		error164, err = error163.Read(iprot)
+		error142 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error143 error
+		error143, err = error142.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error164
+		err = error143
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1114,16 +1083,16 @@ func (p *DialClient) recvDelNginxGroup() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error165 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error166 error
-		error166, err = error165.Read(iprot)
+		error144 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error145 error
+		error145, err = error144.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error166
+		err = error145
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1197,16 +1166,16 @@ func (p *DialClient) recvAddNginxServer() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error167 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error168 error
-		error168, err = error167.Read(iprot)
+		error146 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error147 error
+		error147, err = error146.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error168
+		err = error147
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1280,16 +1249,16 @@ func (p *DialClient) recvDelNginxServer() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error169 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error170 error
-		error170, err = error169.Read(iprot)
+		error148 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error149 error
+		error149, err = error148.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error170
+		err = error149
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1357,16 +1326,16 @@ func (p *DialClient) recvHeartBeat() (value *HeartBeatState, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error171 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error172 error
-		error172, err = error171.Read(iprot)
+		error150 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error151 error
+		error151, err = error150.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error172
+		err = error151
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1438,16 +1407,16 @@ func (p *DialClient) recvSetServerState() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error173 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error174 error
-		error174, err = error173.Read(iprot)
+		error152 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error153 error
+		error153, err = error152.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error174
+		err = error153
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1519,16 +1488,16 @@ func (p *DialClient) recvAddSnmpGroupInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error175 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error176 error
-		error176, err = error175.Read(iprot)
+		error154 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error155 error
+		error155, err = error154.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error176
+		err = error155
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1600,16 +1569,16 @@ func (p *DialClient) recvDelSnmpGroupInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error177 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error178 error
-		error178, err = error177.Read(iprot)
+		error156 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error157 error
+		error157, err = error156.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error178
+		err = error157
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1683,16 +1652,16 @@ func (p *DialClient) recvAddSnmpProcessInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error179 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error180 error
-		error180, err = error179.Read(iprot)
+		error158 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error159 error
+		error159, err = error158.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error180
+		err = error159
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1766,16 +1735,16 @@ func (p *DialClient) recvDelSnmpProcessInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error181 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error182 error
-		error182, err = error181.Read(iprot)
+		error160 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error161 error
+		error161, err = error160.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error182
+		err = error161
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1849,16 +1818,16 @@ func (p *DialClient) recvAddIpSec() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error183 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error184 error
-		error184, err = error183.Read(iprot)
+		error162 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error163 error
+		error163, err = error162.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error184
+		err = error163
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1930,16 +1899,16 @@ func (p *DialClient) recvDelIpSec() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error185 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error186 error
-		error186, err = error185.Read(iprot)
+		error164 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error165 error
+		error165, err = error164.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error186
+		err = error165
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -2011,16 +1980,16 @@ func (p *DialClient) recvAddDcInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error187 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error188 error
-		error188, err = error187.Read(iprot)
+		error166 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error167 error
+		error167, err = error166.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error188
+		err = error167
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -2092,16 +2061,16 @@ func (p *DialClient) recvDelDcInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error189 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error190 error
-		error190, err = error189.Read(iprot)
+		error168 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error169 error
+		error169, err = error168.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error190
+		err = error169
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -2109,818 +2078,6 @@ func (p *DialClient) recvDelDcInfo() (value RetCode, err error) {
 		return
 	}
 	result := DialDelDcInfoResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-func (p *DialClient) HeartBeatDial() (r RetCode, err error) {
-	if err = p.sendHeartBeatDial(); err != nil {
-		return
-	}
-	return p.recvHeartBeatDial()
-}
-
-func (p *DialClient) sendHeartBeatDial() (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("heartBeatDial", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialHeartBeatDialArgs{}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvHeartBeatDial() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "heartBeatDial" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "heartBeatDial failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "heartBeatDial failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error191 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error192 error
-		error192, err = error191.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error192
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "heartBeatDial failed: invalid message type")
-		return
-	}
-	result := DialHeartBeatDialResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-func (p *DialClient) ResetModule() (r RetCode, err error) {
-	if err = p.sendResetModule(); err != nil {
-		return
-	}
-	return p.recvResetModule()
-}
-
-func (p *DialClient) sendResetModule() (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("resetModule", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialResetModuleArgs{}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvResetModule() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "resetModule" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "resetModule failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "resetModule failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error193 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error194 error
-		error194, err = error193.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error194
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "resetModule failed: invalid message type")
-		return
-	}
-	result := DialResetModuleResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - IpSecList
-func (p *DialClient) AddDialIpSec(ipSecList []*IpSec) (r RetCode, err error) {
-	if err = p.sendAddDialIpSec(ipSecList); err != nil {
-		return
-	}
-	return p.recvAddDialIpSec()
-}
-
-func (p *DialClient) sendAddDialIpSec(ipSecList []*IpSec) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("addDialIpSec", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialAddDialIpSecArgs{
-		IpSecList: ipSecList,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvAddDialIpSec() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "addDialIpSec" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "addDialIpSec failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "addDialIpSec failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error195 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error196 error
-		error196, err = error195.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error196
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "addDialIpSec failed: invalid message type")
-		return
-	}
-	result := DialAddDialIpSecResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - IpSecList
-func (p *DialClient) RemoveDialIpSec(ipSecList []*IpSec) (r RetCode, err error) {
-	if err = p.sendRemoveDialIpSec(ipSecList); err != nil {
-		return
-	}
-	return p.recvRemoveDialIpSec()
-}
-
-func (p *DialClient) sendRemoveDialIpSec(ipSecList []*IpSec) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("removeDialIpSec", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialRemoveDialIpSecArgs{
-		IpSecList: ipSecList,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvRemoveDialIpSec() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "removeDialIpSec" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "removeDialIpSec failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "removeDialIpSec failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error197 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error198 error
-		error198, err = error197.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error198
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "removeDialIpSec failed: invalid message type")
-		return
-	}
-	result := DialRemoveDialIpSecResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-func (p *DialClient) ClearDialPlatformIpSec() (r RetCode, err error) {
-	if err = p.sendClearDialPlatformIpSec(); err != nil {
-		return
-	}
-	return p.recvClearDialPlatformIpSec()
-}
-
-func (p *DialClient) sendClearDialPlatformIpSec() (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("clearDialPlatformIpSec", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialClearDialPlatformIpSecArgs{}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvClearDialPlatformIpSec() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "clearDialPlatformIpSec" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "clearDialPlatformIpSec failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "clearDialPlatformIpSec failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error199 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error200 error
-		error200, err = error199.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error200
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "clearDialPlatformIpSec failed: invalid message type")
-		return
-	}
-	result := DialClearDialPlatformIpSecResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - GroupId
-//  - DomainList
-func (p *DialClient) AddDialDomain(groupId string, DomainList []*DomainRecord) (r RetCode, err error) {
-	if err = p.sendAddDialDomain(groupId, DomainList); err != nil {
-		return
-	}
-	return p.recvAddDialDomain()
-}
-
-func (p *DialClient) sendAddDialDomain(groupId string, DomainList []*DomainRecord) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("addDialDomain", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialAddDialDomainArgs{
-		GroupId:    groupId,
-		DomainList: DomainList,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvAddDialDomain() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "addDialDomain" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "addDialDomain failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "addDialDomain failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error201 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error202 error
-		error202, err = error201.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error202
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "addDialDomain failed: invalid message type")
-		return
-	}
-	result := DialAddDialDomainResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - GroupId
-//  - DomainList
-func (p *DialClient) RemoveDialDomain(groupId string, DomainList []*DomainRecord) (r RetCode, err error) {
-	if err = p.sendRemoveDialDomain(groupId, DomainList); err != nil {
-		return
-	}
-	return p.recvRemoveDialDomain()
-}
-
-func (p *DialClient) sendRemoveDialDomain(groupId string, DomainList []*DomainRecord) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("removeDialDomain", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialRemoveDialDomainArgs{
-		GroupId:    groupId,
-		DomainList: DomainList,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvRemoveDialDomain() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "removeDialDomain" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "removeDialDomain failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "removeDialDomain failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error203 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error204 error
-		error204, err = error203.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error204
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "removeDialDomain failed: invalid message type")
-		return
-	}
-	result := DialRemoveDialDomainResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - GroupId
-func (p *DialClient) ClearDialDomain(groupId string) (r RetCode, err error) {
-	if err = p.sendClearDialDomain(groupId); err != nil {
-		return
-	}
-	return p.recvClearDialDomain()
-}
-
-func (p *DialClient) sendClearDialDomain(groupId string) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("clearDialDomain", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialClearDialDomainArgs{
-		GroupId: groupId,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvClearDialDomain() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "clearDialDomain" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "clearDialDomain failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "clearDialDomain failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error205 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error206 error
-		error206, err = error205.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error206
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "clearDialDomain failed: invalid message type")
-		return
-	}
-	result := DialClearDialDomainResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - TaskId
-//  - Method
-//  - TargetList
-//  - Sourceip
-//  - Interval
-//  - DomainGroupId
-func (p *DialClient) AddDialTask(taskId string, method DialMethod, targetList []*IpAddr, sourceip *IpAddr, interval int32, domainGroupId string) (r RetCode, err error) {
-	if err = p.sendAddDialTask(taskId, method, targetList, sourceip, interval, domainGroupId); err != nil {
-		return
-	}
-	return p.recvAddDialTask()
-}
-
-func (p *DialClient) sendAddDialTask(taskId string, method DialMethod, targetList []*IpAddr, sourceip *IpAddr, interval int32, domainGroupId string) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("addDialTask", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialAddDialTaskArgs{
-		TaskId:        taskId,
-		Method:        method,
-		TargetList:    targetList,
-		Sourceip:      sourceip,
-		Interval:      interval,
-		DomainGroupId: domainGroupId,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvAddDialTask() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "addDialTask" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "addDialTask failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "addDialTask failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error207 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error208 error
-		error208, err = error207.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error208
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "addDialTask failed: invalid message type")
-		return
-	}
-	result := DialAddDialTaskResult{}
-	if err = result.Read(iprot); err != nil {
-		return
-	}
-	if err = iprot.ReadMessageEnd(); err != nil {
-		return
-	}
-	if result.Ex != nil {
-		err = result.Ex
-		return
-	}
-	value = result.GetSuccess()
-	return
-}
-
-// Parameters:
-//  - TaskId
-func (p *DialClient) RemoveDialTask(taskId string) (r RetCode, err error) {
-	if err = p.sendRemoveDialTask(taskId); err != nil {
-		return
-	}
-	return p.recvRemoveDialTask()
-}
-
-func (p *DialClient) sendRemoveDialTask(taskId string) (err error) {
-	oprot := p.OutputProtocol
-	if oprot == nil {
-		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.OutputProtocol = oprot
-	}
-	p.SeqId++
-	if err = oprot.WriteMessageBegin("removeDialTask", thrift.CALL, p.SeqId); err != nil {
-		return
-	}
-	args := DialRemoveDialTaskArgs{
-		TaskId: taskId,
-	}
-	if err = args.Write(oprot); err != nil {
-		return
-	}
-	if err = oprot.WriteMessageEnd(); err != nil {
-		return
-	}
-	return oprot.Flush()
-}
-
-func (p *DialClient) recvRemoveDialTask() (value RetCode, err error) {
-	iprot := p.InputProtocol
-	if iprot == nil {
-		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
-		p.InputProtocol = iprot
-	}
-	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
-	if err != nil {
-		return
-	}
-	if method != "removeDialTask" {
-		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "removeDialTask failed: wrong method name")
-		return
-	}
-	if p.SeqId != seqId {
-		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "removeDialTask failed: out of sequence response")
-		return
-	}
-	if mTypeId == thrift.EXCEPTION {
-		error209 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error210 error
-		error210, err = error209.Read(iprot)
-		if err != nil {
-			return
-		}
-		if err = iprot.ReadMessageEnd(); err != nil {
-			return
-		}
-		err = error210
-		return
-	}
-	if mTypeId != thrift.REPLY {
-		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "removeDialTask failed: invalid message type")
-		return
-	}
-	result := DialRemoveDialTaskResult{}
 	if err = result.Read(iprot); err != nil {
 		return
 	}
@@ -2955,42 +2112,32 @@ func (p *DialProcessor) ProcessorMap() map[string]thrift.TProcessorFunction {
 
 func NewDialProcessor(handler Dial) *DialProcessor {
 
-	self211 := &DialProcessor{handler: handler, processorMap: make(map[string]thrift.TProcessorFunction)}
-	self211.processorMap["systemCommand"] = &dialProcessorSystemCommand{handler: handler}
-	self211.processorMap["addHealthGroup"] = &dialProcessorAddHealthGroup{handler: handler}
-	self211.processorMap["delHealthGroup"] = &dialProcessorDelHealthGroup{handler: handler}
-	self211.processorMap["addHealthRecord"] = &dialProcessorAddHealthRecord{handler: handler}
-	self211.processorMap["delHealthRecord"] = &dialProcessorDelHealthRecord{handler: handler}
-	self211.processorMap["addHealthPolicy"] = &dialProcessorAddHealthPolicy{handler: handler}
-	self211.processorMap["modHealthPolicy"] = &dialProcessorModHealthPolicy{handler: handler}
-	self211.processorMap["delHealthPolicy"] = &dialProcessorDelHealthPolicy{handler: handler}
-	self211.processorMap["addDialServer"] = &dialProcessorAddDialServer{handler: handler}
-	self211.processorMap["delDialServer"] = &dialProcessorDelDialServer{handler: handler}
-	self211.processorMap["addNginxGroup"] = &dialProcessorAddNginxGroup{handler: handler}
-	self211.processorMap["delNginxGroup"] = &dialProcessorDelNginxGroup{handler: handler}
-	self211.processorMap["addNginxServer"] = &dialProcessorAddNginxServer{handler: handler}
-	self211.processorMap["delNginxServer"] = &dialProcessorDelNginxServer{handler: handler}
-	self211.processorMap["heartBeat"] = &dialProcessorHeartBeat{handler: handler}
-	self211.processorMap["setServerState"] = &dialProcessorSetServerState{handler: handler}
-	self211.processorMap["addSnmpGroupInfo"] = &dialProcessorAddSnmpGroupInfo{handler: handler}
-	self211.processorMap["delSnmpGroupInfo"] = &dialProcessorDelSnmpGroupInfo{handler: handler}
-	self211.processorMap["addSnmpProcessInfo"] = &dialProcessorAddSnmpProcessInfo{handler: handler}
-	self211.processorMap["delSnmpProcessInfo"] = &dialProcessorDelSnmpProcessInfo{handler: handler}
-	self211.processorMap["addIpSec"] = &dialProcessorAddIpSec{handler: handler}
-	self211.processorMap["delIpSec"] = &dialProcessorDelIpSec{handler: handler}
-	self211.processorMap["addDcInfo"] = &dialProcessorAddDcInfo{handler: handler}
-	self211.processorMap["delDcInfo"] = &dialProcessorDelDcInfo{handler: handler}
-	self211.processorMap["heartBeatDial"] = &dialProcessorHeartBeatDial{handler: handler}
-	self211.processorMap["resetModule"] = &dialProcessorResetModule{handler: handler}
-	self211.processorMap["addDialIpSec"] = &dialProcessorAddDialIpSec{handler: handler}
-	self211.processorMap["removeDialIpSec"] = &dialProcessorRemoveDialIpSec{handler: handler}
-	self211.processorMap["clearDialPlatformIpSec"] = &dialProcessorClearDialPlatformIpSec{handler: handler}
-	self211.processorMap["addDialDomain"] = &dialProcessorAddDialDomain{handler: handler}
-	self211.processorMap["removeDialDomain"] = &dialProcessorRemoveDialDomain{handler: handler}
-	self211.processorMap["clearDialDomain"] = &dialProcessorClearDialDomain{handler: handler}
-	self211.processorMap["addDialTask"] = &dialProcessorAddDialTask{handler: handler}
-	self211.processorMap["removeDialTask"] = &dialProcessorRemoveDialTask{handler: handler}
-	return self211
+	self170 := &DialProcessor{handler: handler, processorMap: make(map[string]thrift.TProcessorFunction)}
+	self170.processorMap["systemCommand"] = &dialProcessorSystemCommand{handler: handler}
+	self170.processorMap["addHealthGroup"] = &dialProcessorAddHealthGroup{handler: handler}
+	self170.processorMap["delHealthGroup"] = &dialProcessorDelHealthGroup{handler: handler}
+	self170.processorMap["addHealthRecord"] = &dialProcessorAddHealthRecord{handler: handler}
+	self170.processorMap["delHealthRecord"] = &dialProcessorDelHealthRecord{handler: handler}
+	self170.processorMap["addHealthPolicy"] = &dialProcessorAddHealthPolicy{handler: handler}
+	self170.processorMap["modHealthPolicy"] = &dialProcessorModHealthPolicy{handler: handler}
+	self170.processorMap["delHealthPolicy"] = &dialProcessorDelHealthPolicy{handler: handler}
+	self170.processorMap["addDialServer"] = &dialProcessorAddDialServer{handler: handler}
+	self170.processorMap["delDialServer"] = &dialProcessorDelDialServer{handler: handler}
+	self170.processorMap["addNginxGroup"] = &dialProcessorAddNginxGroup{handler: handler}
+	self170.processorMap["delNginxGroup"] = &dialProcessorDelNginxGroup{handler: handler}
+	self170.processorMap["addNginxServer"] = &dialProcessorAddNginxServer{handler: handler}
+	self170.processorMap["delNginxServer"] = &dialProcessorDelNginxServer{handler: handler}
+	self170.processorMap["heartBeat"] = &dialProcessorHeartBeat{handler: handler}
+	self170.processorMap["setServerState"] = &dialProcessorSetServerState{handler: handler}
+	self170.processorMap["addSnmpGroupInfo"] = &dialProcessorAddSnmpGroupInfo{handler: handler}
+	self170.processorMap["delSnmpGroupInfo"] = &dialProcessorDelSnmpGroupInfo{handler: handler}
+	self170.processorMap["addSnmpProcessInfo"] = &dialProcessorAddSnmpProcessInfo{handler: handler}
+	self170.processorMap["delSnmpProcessInfo"] = &dialProcessorDelSnmpProcessInfo{handler: handler}
+	self170.processorMap["addIpSec"] = &dialProcessorAddIpSec{handler: handler}
+	self170.processorMap["delIpSec"] = &dialProcessorDelIpSec{handler: handler}
+	self170.processorMap["addDcInfo"] = &dialProcessorAddDcInfo{handler: handler}
+	self170.processorMap["delDcInfo"] = &dialProcessorDelDcInfo{handler: handler}
+	return self170
 }
 
 func (p *DialProcessor) Process(iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
@@ -3003,12 +2150,12 @@ func (p *DialProcessor) Process(iprot, oprot thrift.TProtocol) (success bool, er
 	}
 	iprot.Skip(thrift.STRUCT)
 	iprot.ReadMessageEnd()
-	x212 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function "+name)
+	x171 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function "+name)
 	oprot.WriteMessageBegin(name, thrift.EXCEPTION, seqId)
-	x212.Write(oprot)
+	x171.Write(oprot)
 	oprot.WriteMessageEnd()
 	oprot.Flush()
-	return false, x212
+	return false, x171
 
 }
 
@@ -4284,536 +3431,6 @@ func (p *dialProcessorDelDcInfo) Process(seqId int32, iprot, oprot thrift.TProto
 	return true, err
 }
 
-type dialProcessorHeartBeatDial struct {
-	handler Dial
-}
-
-func (p *dialProcessorHeartBeatDial) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialHeartBeatDialArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("heartBeatDial", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialHeartBeatDialResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.HeartBeatDial(); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing heartBeatDial: "+err2.Error())
-			oprot.WriteMessageBegin("heartBeatDial", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("heartBeatDial", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorResetModule struct {
-	handler Dial
-}
-
-func (p *dialProcessorResetModule) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialResetModuleArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("resetModule", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialResetModuleResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.ResetModule(); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing resetModule: "+err2.Error())
-			oprot.WriteMessageBegin("resetModule", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("resetModule", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorAddDialIpSec struct {
-	handler Dial
-}
-
-func (p *dialProcessorAddDialIpSec) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialAddDialIpSecArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("addDialIpSec", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialAddDialIpSecResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.AddDialIpSec(args.IpSecList); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing addDialIpSec: "+err2.Error())
-			oprot.WriteMessageBegin("addDialIpSec", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("addDialIpSec", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorRemoveDialIpSec struct {
-	handler Dial
-}
-
-func (p *dialProcessorRemoveDialIpSec) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialRemoveDialIpSecArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("removeDialIpSec", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialRemoveDialIpSecResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.RemoveDialIpSec(args.IpSecList); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing removeDialIpSec: "+err2.Error())
-			oprot.WriteMessageBegin("removeDialIpSec", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("removeDialIpSec", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorClearDialPlatformIpSec struct {
-	handler Dial
-}
-
-func (p *dialProcessorClearDialPlatformIpSec) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialClearDialPlatformIpSecArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("clearDialPlatformIpSec", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialClearDialPlatformIpSecResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.ClearDialPlatformIpSec(); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing clearDialPlatformIpSec: "+err2.Error())
-			oprot.WriteMessageBegin("clearDialPlatformIpSec", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("clearDialPlatformIpSec", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorAddDialDomain struct {
-	handler Dial
-}
-
-func (p *dialProcessorAddDialDomain) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialAddDialDomainArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("addDialDomain", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialAddDialDomainResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.AddDialDomain(args.GroupId, args.DomainList); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing addDialDomain: "+err2.Error())
-			oprot.WriteMessageBegin("addDialDomain", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("addDialDomain", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorRemoveDialDomain struct {
-	handler Dial
-}
-
-func (p *dialProcessorRemoveDialDomain) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialRemoveDialDomainArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("removeDialDomain", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialRemoveDialDomainResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.RemoveDialDomain(args.GroupId, args.DomainList); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing removeDialDomain: "+err2.Error())
-			oprot.WriteMessageBegin("removeDialDomain", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("removeDialDomain", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorClearDialDomain struct {
-	handler Dial
-}
-
-func (p *dialProcessorClearDialDomain) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialClearDialDomainArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("clearDialDomain", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialClearDialDomainResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.ClearDialDomain(args.GroupId); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing clearDialDomain: "+err2.Error())
-			oprot.WriteMessageBegin("clearDialDomain", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("clearDialDomain", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorAddDialTask struct {
-	handler Dial
-}
-
-func (p *dialProcessorAddDialTask) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialAddDialTaskArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("addDialTask", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialAddDialTaskResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.AddDialTask(args.TaskId, args.Method, args.TargetList, args.Sourceip, args.Interval, args.DomainGroupId); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing addDialTask: "+err2.Error())
-			oprot.WriteMessageBegin("addDialTask", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("addDialTask", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
-type dialProcessorRemoveDialTask struct {
-	handler Dial
-}
-
-func (p *dialProcessorRemoveDialTask) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-	args := DialRemoveDialTaskArgs{}
-	if err = args.Read(iprot); err != nil {
-		iprot.ReadMessageEnd()
-		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
-		oprot.WriteMessageBegin("removeDialTask", thrift.EXCEPTION, seqId)
-		x.Write(oprot)
-		oprot.WriteMessageEnd()
-		oprot.Flush()
-		return false, err
-	}
-
-	iprot.ReadMessageEnd()
-	result := DialRemoveDialTaskResult{}
-	var retval RetCode
-	var err2 error
-	if retval, err2 = p.handler.RemoveDialTask(args.TaskId); err2 != nil {
-		switch v := err2.(type) {
-		case *Xception:
-			result.Ex = v
-		default:
-			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing removeDialTask: "+err2.Error())
-			oprot.WriteMessageBegin("removeDialTask", thrift.EXCEPTION, seqId)
-			x.Write(oprot)
-			oprot.WriteMessageEnd()
-			oprot.Flush()
-			return true, err2
-		}
-	} else {
-		result.Success = &retval
-	}
-	if err2 = oprot.WriteMessageBegin("removeDialTask", thrift.REPLY, seqId); err2 != nil {
-		err = err2
-	}
-	if err2 = result.Write(oprot); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err2 = oprot.Flush(); err == nil && err2 != nil {
-		err = err2
-	}
-	if err != nil {
-		return
-	}
-	return true, err
-}
-
 // HELPER FUNCTIONS AND STRUCTURES
 
 // Attributes:
@@ -5677,11 +4294,11 @@ func (p *DialAddHealthRecordArgs) readField2(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialRecord, 0, size)
 	p.Records = tSlice
 	for i := 0; i < size; i++ {
-		_elem213 := &DialRecord{}
-		if err := _elem213.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem213), err)
+		_elem172 := &DialRecord{}
+		if err := _elem172.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem172), err)
 		}
-		p.Records = append(p.Records, _elem213)
+		p.Records = append(p.Records, _elem172)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -5970,11 +4587,11 @@ func (p *DialDelHealthRecordArgs) readField2(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialRecord, 0, size)
 	p.Records = tSlice
 	for i := 0; i < size; i++ {
-		_elem214 := &DialRecord{}
-		if err := _elem214.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem214), err)
+		_elem173 := &DialRecord{}
+		if err := _elem173.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem173), err)
 		}
-		p.Records = append(p.Records, _elem214)
+		p.Records = append(p.Records, _elem173)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -8111,11 +6728,11 @@ func (p *DialAddNginxServerArgs) readField2(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialNginxServer, 0, size)
 	p.Servers = tSlice
 	for i := 0; i < size; i++ {
-		_elem215 := &DialNginxServer{}
-		if err := _elem215.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem215), err)
+		_elem174 := &DialNginxServer{}
+		if err := _elem174.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem174), err)
 		}
-		p.Servers = append(p.Servers, _elem215)
+		p.Servers = append(p.Servers, _elem174)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -8404,11 +7021,11 @@ func (p *DialDelNginxServerArgs) readField2(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialNginxServer, 0, size)
 	p.Servers = tSlice
 	for i := 0; i < size; i++ {
-		_elem216 := &DialNginxServer{}
-		if err := _elem216.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem216), err)
+		_elem175 := &DialNginxServer{}
+		if err := _elem175.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem175), err)
 		}
-		p.Servers = append(p.Servers, _elem216)
+		p.Servers = append(p.Servers, _elem175)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -11101,2629 +9718,4 @@ func (p *DialDelDcInfoResult) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("DialDelDcInfoResult(%+v)", *p)
-}
-
-type DialHeartBeatDialArgs struct {
-}
-
-func NewDialHeartBeatDialArgs() *DialHeartBeatDialArgs {
-	return &DialHeartBeatDialArgs{}
-}
-
-func (p *DialHeartBeatDialArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		if err := iprot.Skip(fieldTypeId); err != nil {
-			return err
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialHeartBeatDialArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("heartBeatDial_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialHeartBeatDialArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialHeartBeatDialArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialHeartBeatDialResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialHeartBeatDialResult() *DialHeartBeatDialResult {
-	return &DialHeartBeatDialResult{}
-}
-
-var DialHeartBeatDialResult_Success_DEFAULT RetCode
-
-func (p *DialHeartBeatDialResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialHeartBeatDialResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialHeartBeatDialResult_Ex_DEFAULT *Xception
-
-func (p *DialHeartBeatDialResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialHeartBeatDialResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialHeartBeatDialResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialHeartBeatDialResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialHeartBeatDialResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialHeartBeatDialResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialHeartBeatDialResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialHeartBeatDialResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("heartBeatDial_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialHeartBeatDialResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialHeartBeatDialResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialHeartBeatDialResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialHeartBeatDialResult(%+v)", *p)
-}
-
-type DialResetModuleArgs struct {
-}
-
-func NewDialResetModuleArgs() *DialResetModuleArgs {
-	return &DialResetModuleArgs{}
-}
-
-func (p *DialResetModuleArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		if err := iprot.Skip(fieldTypeId); err != nil {
-			return err
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialResetModuleArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("resetModule_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialResetModuleArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialResetModuleArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialResetModuleResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialResetModuleResult() *DialResetModuleResult {
-	return &DialResetModuleResult{}
-}
-
-var DialResetModuleResult_Success_DEFAULT RetCode
-
-func (p *DialResetModuleResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialResetModuleResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialResetModuleResult_Ex_DEFAULT *Xception
-
-func (p *DialResetModuleResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialResetModuleResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialResetModuleResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialResetModuleResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialResetModuleResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialResetModuleResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialResetModuleResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialResetModuleResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("resetModule_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialResetModuleResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialResetModuleResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialResetModuleResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialResetModuleResult(%+v)", *p)
-}
-
-// Attributes:
-//  - IpSecList
-type DialAddDialIpSecArgs struct {
-	IpSecList []*IpSec `thrift:"ipSecList,1" json:"ipSecList"`
-}
-
-func NewDialAddDialIpSecArgs() *DialAddDialIpSecArgs {
-	return &DialAddDialIpSecArgs{}
-}
-
-func (p *DialAddDialIpSecArgs) GetIpSecList() []*IpSec {
-	return p.IpSecList
-}
-func (p *DialAddDialIpSecArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecArgs) readField1(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return thrift.PrependError("error reading list begin: ", err)
-	}
-	tSlice := make([]*IpSec, 0, size)
-	p.IpSecList = tSlice
-	for i := 0; i < size; i++ {
-		_elem217 := &IpSec{}
-		if err := _elem217.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem217), err)
-		}
-		p.IpSecList = append(p.IpSecList, _elem217)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
-		return thrift.PrependError("error reading list end: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("addDialIpSec_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("ipSecList", thrift.LIST, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ipSecList: ", p), err)
-	}
-	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.IpSecList)); err != nil {
-		return thrift.PrependError("error writing list begin: ", err)
-	}
-	for _, v := range p.IpSecList {
-		if err := v.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
-		return thrift.PrependError("error writing list end: ", err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ipSecList: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialIpSecArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialAddDialIpSecArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialAddDialIpSecResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialAddDialIpSecResult() *DialAddDialIpSecResult {
-	return &DialAddDialIpSecResult{}
-}
-
-var DialAddDialIpSecResult_Success_DEFAULT RetCode
-
-func (p *DialAddDialIpSecResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialAddDialIpSecResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialAddDialIpSecResult_Ex_DEFAULT *Xception
-
-func (p *DialAddDialIpSecResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialAddDialIpSecResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialAddDialIpSecResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialAddDialIpSecResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialAddDialIpSecResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("addDialIpSec_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialIpSecResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialAddDialIpSecResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialAddDialIpSecResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialAddDialIpSecResult(%+v)", *p)
-}
-
-// Attributes:
-//  - IpSecList
-type DialRemoveDialIpSecArgs struct {
-	IpSecList []*IpSec `thrift:"ipSecList,1" json:"ipSecList"`
-}
-
-func NewDialRemoveDialIpSecArgs() *DialRemoveDialIpSecArgs {
-	return &DialRemoveDialIpSecArgs{}
-}
-
-func (p *DialRemoveDialIpSecArgs) GetIpSecList() []*IpSec {
-	return p.IpSecList
-}
-func (p *DialRemoveDialIpSecArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecArgs) readField1(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return thrift.PrependError("error reading list begin: ", err)
-	}
-	tSlice := make([]*IpSec, 0, size)
-	p.IpSecList = tSlice
-	for i := 0; i < size; i++ {
-		_elem218 := &IpSec{}
-		if err := _elem218.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem218), err)
-		}
-		p.IpSecList = append(p.IpSecList, _elem218)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
-		return thrift.PrependError("error reading list end: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("removeDialIpSec_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("ipSecList", thrift.LIST, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ipSecList: ", p), err)
-	}
-	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.IpSecList)); err != nil {
-		return thrift.PrependError("error writing list begin: ", err)
-	}
-	for _, v := range p.IpSecList {
-		if err := v.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
-		return thrift.PrependError("error writing list end: ", err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ipSecList: ", p), err)
-	}
-	return err
-}
-
-func (p *DialRemoveDialIpSecArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialRemoveDialIpSecArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialRemoveDialIpSecResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialRemoveDialIpSecResult() *DialRemoveDialIpSecResult {
-	return &DialRemoveDialIpSecResult{}
-}
-
-var DialRemoveDialIpSecResult_Success_DEFAULT RetCode
-
-func (p *DialRemoveDialIpSecResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialRemoveDialIpSecResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialRemoveDialIpSecResult_Ex_DEFAULT *Xception
-
-func (p *DialRemoveDialIpSecResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialRemoveDialIpSecResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialRemoveDialIpSecResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialRemoveDialIpSecResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialRemoveDialIpSecResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("removeDialIpSec_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialIpSecResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialRemoveDialIpSecResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialRemoveDialIpSecResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialRemoveDialIpSecResult(%+v)", *p)
-}
-
-type DialClearDialPlatformIpSecArgs struct {
-}
-
-func NewDialClearDialPlatformIpSecArgs() *DialClearDialPlatformIpSecArgs {
-	return &DialClearDialPlatformIpSecArgs{}
-}
-
-func (p *DialClearDialPlatformIpSecArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		if err := iprot.Skip(fieldTypeId); err != nil {
-			return err
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialClearDialPlatformIpSecArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("clearDialPlatformIpSec_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialClearDialPlatformIpSecArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialClearDialPlatformIpSecArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialClearDialPlatformIpSecResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialClearDialPlatformIpSecResult() *DialClearDialPlatformIpSecResult {
-	return &DialClearDialPlatformIpSecResult{}
-}
-
-var DialClearDialPlatformIpSecResult_Success_DEFAULT RetCode
-
-func (p *DialClearDialPlatformIpSecResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialClearDialPlatformIpSecResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialClearDialPlatformIpSecResult_Ex_DEFAULT *Xception
-
-func (p *DialClearDialPlatformIpSecResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialClearDialPlatformIpSecResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialClearDialPlatformIpSecResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialClearDialPlatformIpSecResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialClearDialPlatformIpSecResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialClearDialPlatformIpSecResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialClearDialPlatformIpSecResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialClearDialPlatformIpSecResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("clearDialPlatformIpSec_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialClearDialPlatformIpSecResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialClearDialPlatformIpSecResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialClearDialPlatformIpSecResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialClearDialPlatformIpSecResult(%+v)", *p)
-}
-
-// Attributes:
-//  - GroupId
-//  - DomainList
-type DialAddDialDomainArgs struct {
-	GroupId    string          `thrift:"groupId,1" json:"groupId"`
-	DomainList []*DomainRecord `thrift:"DomainList,2" json:"DomainList"`
-}
-
-func NewDialAddDialDomainArgs() *DialAddDialDomainArgs {
-	return &DialAddDialDomainArgs{}
-}
-
-func (p *DialAddDialDomainArgs) GetGroupId() string {
-	return p.GroupId
-}
-
-func (p *DialAddDialDomainArgs) GetDomainList() []*DomainRecord {
-	return p.DomainList
-}
-func (p *DialAddDialDomainArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		case 2:
-			if err := p.readField2(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainArgs) readField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return thrift.PrependError("error reading field 1: ", err)
-	} else {
-		p.GroupId = v
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainArgs) readField2(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return thrift.PrependError("error reading list begin: ", err)
-	}
-	tSlice := make([]*DomainRecord, 0, size)
-	p.DomainList = tSlice
-	for i := 0; i < size; i++ {
-		_elem219 := &DomainRecord{}
-		if err := _elem219.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem219), err)
-		}
-		p.DomainList = append(p.DomainList, _elem219)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
-		return thrift.PrependError("error reading list end: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("addDialDomain_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField2(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("groupId", thrift.STRING, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:groupId: ", p), err)
-	}
-	if err := oprot.WriteString(string(p.GroupId)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.groupId (1) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:groupId: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialDomainArgs) writeField2(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("DomainList", thrift.LIST, 2); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 2:DomainList: ", p), err)
-	}
-	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.DomainList)); err != nil {
-		return thrift.PrependError("error writing list begin: ", err)
-	}
-	for _, v := range p.DomainList {
-		if err := v.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
-		return thrift.PrependError("error writing list end: ", err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 2:DomainList: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialDomainArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialAddDialDomainArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialAddDialDomainResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialAddDialDomainResult() *DialAddDialDomainResult {
-	return &DialAddDialDomainResult{}
-}
-
-var DialAddDialDomainResult_Success_DEFAULT RetCode
-
-func (p *DialAddDialDomainResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialAddDialDomainResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialAddDialDomainResult_Ex_DEFAULT *Xception
-
-func (p *DialAddDialDomainResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialAddDialDomainResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialAddDialDomainResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialAddDialDomainResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialAddDialDomainResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("addDialDomain_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialDomainResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialAddDialDomainResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialAddDialDomainResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialAddDialDomainResult(%+v)", *p)
-}
-
-// Attributes:
-//  - GroupId
-//  - DomainList
-type DialRemoveDialDomainArgs struct {
-	GroupId    string          `thrift:"groupId,1" json:"groupId"`
-	DomainList []*DomainRecord `thrift:"DomainList,2" json:"DomainList"`
-}
-
-func NewDialRemoveDialDomainArgs() *DialRemoveDialDomainArgs {
-	return &DialRemoveDialDomainArgs{}
-}
-
-func (p *DialRemoveDialDomainArgs) GetGroupId() string {
-	return p.GroupId
-}
-
-func (p *DialRemoveDialDomainArgs) GetDomainList() []*DomainRecord {
-	return p.DomainList
-}
-func (p *DialRemoveDialDomainArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		case 2:
-			if err := p.readField2(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainArgs) readField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return thrift.PrependError("error reading field 1: ", err)
-	} else {
-		p.GroupId = v
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainArgs) readField2(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return thrift.PrependError("error reading list begin: ", err)
-	}
-	tSlice := make([]*DomainRecord, 0, size)
-	p.DomainList = tSlice
-	for i := 0; i < size; i++ {
-		_elem220 := &DomainRecord{}
-		if err := _elem220.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem220), err)
-		}
-		p.DomainList = append(p.DomainList, _elem220)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
-		return thrift.PrependError("error reading list end: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("removeDialDomain_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField2(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("groupId", thrift.STRING, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:groupId: ", p), err)
-	}
-	if err := oprot.WriteString(string(p.GroupId)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.groupId (1) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:groupId: ", p), err)
-	}
-	return err
-}
-
-func (p *DialRemoveDialDomainArgs) writeField2(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("DomainList", thrift.LIST, 2); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 2:DomainList: ", p), err)
-	}
-	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.DomainList)); err != nil {
-		return thrift.PrependError("error writing list begin: ", err)
-	}
-	for _, v := range p.DomainList {
-		if err := v.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
-		return thrift.PrependError("error writing list end: ", err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 2:DomainList: ", p), err)
-	}
-	return err
-}
-
-func (p *DialRemoveDialDomainArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialRemoveDialDomainArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialRemoveDialDomainResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialRemoveDialDomainResult() *DialRemoveDialDomainResult {
-	return &DialRemoveDialDomainResult{}
-}
-
-var DialRemoveDialDomainResult_Success_DEFAULT RetCode
-
-func (p *DialRemoveDialDomainResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialRemoveDialDomainResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialRemoveDialDomainResult_Ex_DEFAULT *Xception
-
-func (p *DialRemoveDialDomainResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialRemoveDialDomainResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialRemoveDialDomainResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialRemoveDialDomainResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialRemoveDialDomainResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("removeDialDomain_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialDomainResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialRemoveDialDomainResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialRemoveDialDomainResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialRemoveDialDomainResult(%+v)", *p)
-}
-
-// Attributes:
-//  - GroupId
-type DialClearDialDomainArgs struct {
-	GroupId string `thrift:"groupId,1" json:"groupId"`
-}
-
-func NewDialClearDialDomainArgs() *DialClearDialDomainArgs {
-	return &DialClearDialDomainArgs{}
-}
-
-func (p *DialClearDialDomainArgs) GetGroupId() string {
-	return p.GroupId
-}
-func (p *DialClearDialDomainArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainArgs) readField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return thrift.PrependError("error reading field 1: ", err)
-	} else {
-		p.GroupId = v
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("clearDialDomain_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("groupId", thrift.STRING, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:groupId: ", p), err)
-	}
-	if err := oprot.WriteString(string(p.GroupId)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.groupId (1) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:groupId: ", p), err)
-	}
-	return err
-}
-
-func (p *DialClearDialDomainArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialClearDialDomainArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialClearDialDomainResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialClearDialDomainResult() *DialClearDialDomainResult {
-	return &DialClearDialDomainResult{}
-}
-
-var DialClearDialDomainResult_Success_DEFAULT RetCode
-
-func (p *DialClearDialDomainResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialClearDialDomainResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialClearDialDomainResult_Ex_DEFAULT *Xception
-
-func (p *DialClearDialDomainResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialClearDialDomainResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialClearDialDomainResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialClearDialDomainResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialClearDialDomainResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("clearDialDomain_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialClearDialDomainResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialClearDialDomainResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialClearDialDomainResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialClearDialDomainResult(%+v)", *p)
-}
-
-// Attributes:
-//  - TaskId
-//  - Method
-//  - TargetList
-//  - Sourceip
-//  - Interval
-//  - DomainGroupId
-type DialAddDialTaskArgs struct {
-	TaskId        string     `thrift:"taskId,1" json:"taskId"`
-	Method        DialMethod `thrift:"method,2" json:"method"`
-	TargetList    []*IpAddr  `thrift:"targetList,3" json:"targetList"`
-	Sourceip      *IpAddr    `thrift:"sourceip,4" json:"sourceip"`
-	Interval      int32      `thrift:"interval,5" json:"interval"`
-	DomainGroupId string     `thrift:"domainGroupId,6" json:"domainGroupId"`
-}
-
-func NewDialAddDialTaskArgs() *DialAddDialTaskArgs {
-	return &DialAddDialTaskArgs{}
-}
-
-func (p *DialAddDialTaskArgs) GetTaskId() string {
-	return p.TaskId
-}
-
-func (p *DialAddDialTaskArgs) GetMethod() DialMethod {
-	return p.Method
-}
-
-func (p *DialAddDialTaskArgs) GetTargetList() []*IpAddr {
-	return p.TargetList
-}
-
-var DialAddDialTaskArgs_Sourceip_DEFAULT *IpAddr
-
-func (p *DialAddDialTaskArgs) GetSourceip() *IpAddr {
-	if !p.IsSetSourceip() {
-		return DialAddDialTaskArgs_Sourceip_DEFAULT
-	}
-	return p.Sourceip
-}
-
-func (p *DialAddDialTaskArgs) GetInterval() int32 {
-	return p.Interval
-}
-
-func (p *DialAddDialTaskArgs) GetDomainGroupId() string {
-	return p.DomainGroupId
-}
-func (p *DialAddDialTaskArgs) IsSetSourceip() bool {
-	return p.Sourceip != nil
-}
-
-func (p *DialAddDialTaskArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		case 2:
-			if err := p.readField2(iprot); err != nil {
-				return err
-			}
-		case 3:
-			if err := p.readField3(iprot); err != nil {
-				return err
-			}
-		case 4:
-			if err := p.readField4(iprot); err != nil {
-				return err
-			}
-		case 5:
-			if err := p.readField5(iprot); err != nil {
-				return err
-			}
-		case 6:
-			if err := p.readField6(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) readField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return thrift.PrependError("error reading field 1: ", err)
-	} else {
-		p.TaskId = v
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) readField2(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 2: ", err)
-	} else {
-		temp := DialMethod(v)
-		p.Method = temp
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) readField3(iprot thrift.TProtocol) error {
-	_, size, err := iprot.ReadListBegin()
-	if err != nil {
-		return thrift.PrependError("error reading list begin: ", err)
-	}
-	tSlice := make([]*IpAddr, 0, size)
-	p.TargetList = tSlice
-	for i := 0; i < size; i++ {
-		_elem221 := &IpAddr{}
-		if err := _elem221.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem221), err)
-		}
-		p.TargetList = append(p.TargetList, _elem221)
-	}
-	if err := iprot.ReadListEnd(); err != nil {
-		return thrift.PrependError("error reading list end: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) readField4(iprot thrift.TProtocol) error {
-	p.Sourceip = &IpAddr{}
-	if err := p.Sourceip.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Sourceip), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) readField5(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 5: ", err)
-	} else {
-		p.Interval = v
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) readField6(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return thrift.PrependError("error reading field 6: ", err)
-	} else {
-		p.DomainGroupId = v
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("addDialTask_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField2(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField3(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField4(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField5(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField6(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("taskId", thrift.STRING, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:taskId: ", p), err)
-	}
-	if err := oprot.WriteString(string(p.TaskId)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.taskId (1) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:taskId: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialTaskArgs) writeField2(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("method", thrift.I32, 2); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 2:method: ", p), err)
-	}
-	if err := oprot.WriteI32(int32(p.Method)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.method (2) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 2:method: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialTaskArgs) writeField3(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("targetList", thrift.LIST, 3); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 3:targetList: ", p), err)
-	}
-	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.TargetList)); err != nil {
-		return thrift.PrependError("error writing list begin: ", err)
-	}
-	for _, v := range p.TargetList {
-		if err := v.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", v), err)
-		}
-	}
-	if err := oprot.WriteListEnd(); err != nil {
-		return thrift.PrependError("error writing list end: ", err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 3:targetList: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialTaskArgs) writeField4(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("sourceip", thrift.STRUCT, 4); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 4:sourceip: ", p), err)
-	}
-	if err := p.Sourceip.Write(oprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Sourceip), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 4:sourceip: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialTaskArgs) writeField5(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("interval", thrift.I32, 5); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 5:interval: ", p), err)
-	}
-	if err := oprot.WriteI32(int32(p.Interval)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.interval (5) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 5:interval: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialTaskArgs) writeField6(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("domainGroupId", thrift.STRING, 6); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 6:domainGroupId: ", p), err)
-	}
-	if err := oprot.WriteString(string(p.DomainGroupId)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.domainGroupId (6) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 6:domainGroupId: ", p), err)
-	}
-	return err
-}
-
-func (p *DialAddDialTaskArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialAddDialTaskArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialAddDialTaskResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialAddDialTaskResult() *DialAddDialTaskResult {
-	return &DialAddDialTaskResult{}
-}
-
-var DialAddDialTaskResult_Success_DEFAULT RetCode
-
-func (p *DialAddDialTaskResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialAddDialTaskResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialAddDialTaskResult_Ex_DEFAULT *Xception
-
-func (p *DialAddDialTaskResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialAddDialTaskResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialAddDialTaskResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialAddDialTaskResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialAddDialTaskResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("addDialTask_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialAddDialTaskResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialAddDialTaskResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialAddDialTaskResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialAddDialTaskResult(%+v)", *p)
-}
-
-// Attributes:
-//  - TaskId
-type DialRemoveDialTaskArgs struct {
-	TaskId string `thrift:"taskId,1" json:"taskId"`
-}
-
-func NewDialRemoveDialTaskArgs() *DialRemoveDialTaskArgs {
-	return &DialRemoveDialTaskArgs{}
-}
-
-func (p *DialRemoveDialTaskArgs) GetTaskId() string {
-	return p.TaskId
-}
-func (p *DialRemoveDialTaskArgs) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskArgs) readField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return thrift.PrependError("error reading field 1: ", err)
-	} else {
-		p.TaskId = v
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskArgs) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("removeDialTask_args"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskArgs) writeField1(oprot thrift.TProtocol) (err error) {
-	if err := oprot.WriteFieldBegin("taskId", thrift.STRING, 1); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:taskId: ", p), err)
-	}
-	if err := oprot.WriteString(string(p.TaskId)); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T.taskId (1) field write error: ", p), err)
-	}
-	if err := oprot.WriteFieldEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:taskId: ", p), err)
-	}
-	return err
-}
-
-func (p *DialRemoveDialTaskArgs) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialRemoveDialTaskArgs(%+v)", *p)
-}
-
-// Attributes:
-//  - Success
-//  - Ex
-type DialRemoveDialTaskResult struct {
-	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
-	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
-}
-
-func NewDialRemoveDialTaskResult() *DialRemoveDialTaskResult {
-	return &DialRemoveDialTaskResult{}
-}
-
-var DialRemoveDialTaskResult_Success_DEFAULT RetCode
-
-func (p *DialRemoveDialTaskResult) GetSuccess() RetCode {
-	if !p.IsSetSuccess() {
-		return DialRemoveDialTaskResult_Success_DEFAULT
-	}
-	return *p.Success
-}
-
-var DialRemoveDialTaskResult_Ex_DEFAULT *Xception
-
-func (p *DialRemoveDialTaskResult) GetEx() *Xception {
-	if !p.IsSetEx() {
-		return DialRemoveDialTaskResult_Ex_DEFAULT
-	}
-	return p.Ex
-}
-func (p *DialRemoveDialTaskResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DialRemoveDialTaskResult) IsSetEx() bool {
-	return p.Ex != nil
-}
-
-func (p *DialRemoveDialTaskResult) Read(iprot thrift.TProtocol) error {
-	if _, err := iprot.ReadStructBegin(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
-	}
-
-	for {
-		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
-		if err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
-		}
-		if fieldTypeId == thrift.STOP {
-			break
-		}
-		switch fieldId {
-		case 0:
-			if err := p.readField0(iprot); err != nil {
-				return err
-			}
-		case 1:
-			if err := p.readField1(iprot); err != nil {
-				return err
-			}
-		default:
-			if err := iprot.Skip(fieldTypeId); err != nil {
-				return err
-			}
-		}
-		if err := iprot.ReadFieldEnd(); err != nil {
-			return err
-		}
-	}
-	if err := iprot.ReadStructEnd(); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskResult) readField0(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadI32(); err != nil {
-		return thrift.PrependError("error reading field 0: ", err)
-	} else {
-		temp := RetCode(v)
-		p.Success = &temp
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskResult) readField1(iprot thrift.TProtocol) error {
-	p.Ex = &Xception{}
-	if err := p.Ex.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskResult) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("removeDialTask_result"); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
-	}
-	if err := p.writeField0(oprot); err != nil {
-		return err
-	}
-	if err := p.writeField1(oprot); err != nil {
-		return err
-	}
-	if err := oprot.WriteFieldStop(); err != nil {
-		return thrift.PrependError("write field stop error: ", err)
-	}
-	if err := oprot.WriteStructEnd(); err != nil {
-		return thrift.PrependError("write struct stop error: ", err)
-	}
-	return nil
-}
-
-func (p *DialRemoveDialTaskResult) writeField0(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSuccess() {
-		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
-		}
-		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialRemoveDialTaskResult) writeField1(oprot thrift.TProtocol) (err error) {
-	if p.IsSetEx() {
-		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
-		}
-		if err := p.Ex.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
-		}
-		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
-		}
-	}
-	return err
-}
-
-func (p *DialRemoveDialTaskResult) String() string {
-	if p == nil {
-		return "<nil>"
-	}
-	return fmt.Sprintf("DialRemoveDialTaskResult(%+v)", *p)
 }

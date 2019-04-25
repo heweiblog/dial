@@ -62,6 +62,17 @@ type Agent interface {
 	//  - Snmp
 	//  - Mactable
 	UpdateMacTable(snmp string, mactable []*MacTable) (r RetCode, err error)
+	// Parameters:
+	//  - ModuleId
+	//  - IP
+	//  - Port
+	RegisterDialModule(moduleId int32, ip *IpAddr, port int32) (r RetCode, err error)
+	// Parameters:
+	//  - ModuleId
+	UnRegisterDialModule(moduleId int32) (r RetCode, err error)
+	// Parameters:
+	//  - ModuleId
+	HeartBeat(moduleId int32) (r RetCode, err error)
 }
 
 type AgentClient struct {
@@ -140,16 +151,16 @@ func (p *AgentClient) recvRegisterModule() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error4 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error5 error
-		error5, err = error4.Read(iprot)
+		error9 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error10 error
+		error10, err = error9.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error5
+		err = error10
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -221,16 +232,16 @@ func (p *AgentClient) recvUpdateHealthStatus() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error6 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error7 error
-		error7, err = error6.Read(iprot)
+		error11 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error12 error
+		error12, err = error11.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error7
+		err = error12
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -302,16 +313,16 @@ func (p *AgentClient) recvUpdateServerStatus() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error8 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error9 error
-		error9, err = error8.Read(iprot)
+		error13 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error14 error
+		error14, err = error13.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error9
+		err = error14
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -383,16 +394,16 @@ func (p *AgentClient) recvUpdateDcStatus() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error10 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error11 error
-		error11, err = error10.Read(iprot)
+		error15 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error16 error
+		error16, err = error15.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error11
+		err = error16
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -464,16 +475,16 @@ func (p *AgentClient) recvUpdateNginxStatus() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error12 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error13 error
-		error13, err = error12.Read(iprot)
+		error17 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error18 error
+		error18, err = error17.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error13
+		err = error18
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -547,16 +558,16 @@ func (p *AgentClient) recvUpdateSysInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error14 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error15 error
-		error15, err = error14.Read(iprot)
+		error19 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error20 error
+		error20, err = error19.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error15
+		err = error20
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -630,16 +641,16 @@ func (p *AgentClient) recvUpdateInterfaceInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error16 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error17 error
-		error17, err = error16.Read(iprot)
+		error21 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error22 error
+		error22, err = error21.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error17
+		err = error22
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -713,16 +724,16 @@ func (p *AgentClient) recvUpdateInterfaceTraffic() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error18 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error19 error
-		error19, err = error18.Read(iprot)
+		error23 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error24 error
+		error24, err = error23.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error19
+		err = error24
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -796,16 +807,16 @@ func (p *AgentClient) recvUpdateInterfaceIpMac() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error20 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error21 error
-		error21, err = error20.Read(iprot)
+		error25 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error26 error
+		error26, err = error25.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error21
+		err = error26
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -879,16 +890,16 @@ func (p *AgentClient) recvUpdateRouteInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error22 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error23 error
-		error23, err = error22.Read(iprot)
+		error27 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error28 error
+		error28, err = error27.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error23
+		err = error28
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -962,16 +973,16 @@ func (p *AgentClient) recvUpdateProcessInfo() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error24 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error25 error
-		error25, err = error24.Read(iprot)
+		error29 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error30 error
+		error30, err = error29.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error25
+		err = error30
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1045,16 +1056,16 @@ func (p *AgentClient) recvUpdateIpSecOnlineIp() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error26 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error27 error
-		error27, err = error26.Read(iprot)
+		error31 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error32 error
+		error32, err = error31.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error27
+		err = error32
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1128,16 +1139,16 @@ func (p *AgentClient) recvUpdateMacTable() (value RetCode, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error28 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error29 error
-		error29, err = error28.Read(iprot)
+		error33 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error34 error
+		error34, err = error33.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error29
+		err = error34
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -1145,6 +1156,253 @@ func (p *AgentClient) recvUpdateMacTable() (value RetCode, err error) {
 		return
 	}
 	result := AgentUpdateMacTableResult{}
+	if err = result.Read(iprot); err != nil {
+		return
+	}
+	if err = iprot.ReadMessageEnd(); err != nil {
+		return
+	}
+	if result.Ex != nil {
+		err = result.Ex
+		return
+	}
+	value = result.GetSuccess()
+	return
+}
+
+// Parameters:
+//  - ModuleId
+//  - IP
+//  - Port
+func (p *AgentClient) RegisterDialModule(moduleId int32, ip *IpAddr, port int32) (r RetCode, err error) {
+	if err = p.sendRegisterDialModule(moduleId, ip, port); err != nil {
+		return
+	}
+	return p.recvRegisterDialModule()
+}
+
+func (p *AgentClient) sendRegisterDialModule(moduleId int32, ip *IpAddr, port int32) (err error) {
+	oprot := p.OutputProtocol
+	if oprot == nil {
+		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
+		p.OutputProtocol = oprot
+	}
+	p.SeqId++
+	if err = oprot.WriteMessageBegin("registerDialModule", thrift.CALL, p.SeqId); err != nil {
+		return
+	}
+	args := AgentRegisterDialModuleArgs{
+		ModuleId: moduleId,
+		IP:       ip,
+		Port:     port,
+	}
+	if err = args.Write(oprot); err != nil {
+		return
+	}
+	if err = oprot.WriteMessageEnd(); err != nil {
+		return
+	}
+	return oprot.Flush()
+}
+
+func (p *AgentClient) recvRegisterDialModule() (value RetCode, err error) {
+	iprot := p.InputProtocol
+	if iprot == nil {
+		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
+		p.InputProtocol = iprot
+	}
+	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
+	if err != nil {
+		return
+	}
+	if method != "registerDialModule" {
+		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "registerDialModule failed: wrong method name")
+		return
+	}
+	if p.SeqId != seqId {
+		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "registerDialModule failed: out of sequence response")
+		return
+	}
+	if mTypeId == thrift.EXCEPTION {
+		error35 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error36 error
+		error36, err = error35.Read(iprot)
+		if err != nil {
+			return
+		}
+		if err = iprot.ReadMessageEnd(); err != nil {
+			return
+		}
+		err = error36
+		return
+	}
+	if mTypeId != thrift.REPLY {
+		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "registerDialModule failed: invalid message type")
+		return
+	}
+	result := AgentRegisterDialModuleResult{}
+	if err = result.Read(iprot); err != nil {
+		return
+	}
+	if err = iprot.ReadMessageEnd(); err != nil {
+		return
+	}
+	if result.Ex != nil {
+		err = result.Ex
+		return
+	}
+	value = result.GetSuccess()
+	return
+}
+
+// Parameters:
+//  - ModuleId
+func (p *AgentClient) UnRegisterDialModule(moduleId int32) (r RetCode, err error) {
+	if err = p.sendUnRegisterDialModule(moduleId); err != nil {
+		return
+	}
+	return p.recvUnRegisterDialModule()
+}
+
+func (p *AgentClient) sendUnRegisterDialModule(moduleId int32) (err error) {
+	oprot := p.OutputProtocol
+	if oprot == nil {
+		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
+		p.OutputProtocol = oprot
+	}
+	p.SeqId++
+	if err = oprot.WriteMessageBegin("unRegisterDialModule", thrift.CALL, p.SeqId); err != nil {
+		return
+	}
+	args := AgentUnRegisterDialModuleArgs{
+		ModuleId: moduleId,
+	}
+	if err = args.Write(oprot); err != nil {
+		return
+	}
+	if err = oprot.WriteMessageEnd(); err != nil {
+		return
+	}
+	return oprot.Flush()
+}
+
+func (p *AgentClient) recvUnRegisterDialModule() (value RetCode, err error) {
+	iprot := p.InputProtocol
+	if iprot == nil {
+		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
+		p.InputProtocol = iprot
+	}
+	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
+	if err != nil {
+		return
+	}
+	if method != "unRegisterDialModule" {
+		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "unRegisterDialModule failed: wrong method name")
+		return
+	}
+	if p.SeqId != seqId {
+		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "unRegisterDialModule failed: out of sequence response")
+		return
+	}
+	if mTypeId == thrift.EXCEPTION {
+		error37 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error38 error
+		error38, err = error37.Read(iprot)
+		if err != nil {
+			return
+		}
+		if err = iprot.ReadMessageEnd(); err != nil {
+			return
+		}
+		err = error38
+		return
+	}
+	if mTypeId != thrift.REPLY {
+		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "unRegisterDialModule failed: invalid message type")
+		return
+	}
+	result := AgentUnRegisterDialModuleResult{}
+	if err = result.Read(iprot); err != nil {
+		return
+	}
+	if err = iprot.ReadMessageEnd(); err != nil {
+		return
+	}
+	if result.Ex != nil {
+		err = result.Ex
+		return
+	}
+	value = result.GetSuccess()
+	return
+}
+
+// Parameters:
+//  - ModuleId
+func (p *AgentClient) HeartBeat(moduleId int32) (r RetCode, err error) {
+	if err = p.sendHeartBeat(moduleId); err != nil {
+		return
+	}
+	return p.recvHeartBeat()
+}
+
+func (p *AgentClient) sendHeartBeat(moduleId int32) (err error) {
+	oprot := p.OutputProtocol
+	if oprot == nil {
+		oprot = p.ProtocolFactory.GetProtocol(p.Transport)
+		p.OutputProtocol = oprot
+	}
+	p.SeqId++
+	if err = oprot.WriteMessageBegin("heartBeat", thrift.CALL, p.SeqId); err != nil {
+		return
+	}
+	args := AgentHeartBeatArgs{
+		ModuleId: moduleId,
+	}
+	if err = args.Write(oprot); err != nil {
+		return
+	}
+	if err = oprot.WriteMessageEnd(); err != nil {
+		return
+	}
+	return oprot.Flush()
+}
+
+func (p *AgentClient) recvHeartBeat() (value RetCode, err error) {
+	iprot := p.InputProtocol
+	if iprot == nil {
+		iprot = p.ProtocolFactory.GetProtocol(p.Transport)
+		p.InputProtocol = iprot
+	}
+	method, mTypeId, seqId, err := iprot.ReadMessageBegin()
+	if err != nil {
+		return
+	}
+	if method != "heartBeat" {
+		err = thrift.NewTApplicationException(thrift.WRONG_METHOD_NAME, "heartBeat failed: wrong method name")
+		return
+	}
+	if p.SeqId != seqId {
+		err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "heartBeat failed: out of sequence response")
+		return
+	}
+	if mTypeId == thrift.EXCEPTION {
+		error39 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error40 error
+		error40, err = error39.Read(iprot)
+		if err != nil {
+			return
+		}
+		if err = iprot.ReadMessageEnd(); err != nil {
+			return
+		}
+		err = error40
+		return
+	}
+	if mTypeId != thrift.REPLY {
+		err = thrift.NewTApplicationException(thrift.INVALID_MESSAGE_TYPE_EXCEPTION, "heartBeat failed: invalid message type")
+		return
+	}
+	result := AgentHeartBeatResult{}
 	if err = result.Read(iprot); err != nil {
 		return
 	}
@@ -1179,21 +1437,24 @@ func (p *AgentProcessor) ProcessorMap() map[string]thrift.TProcessorFunction {
 
 func NewAgentProcessor(handler Agent) *AgentProcessor {
 
-	self30 := &AgentProcessor{handler: handler, processorMap: make(map[string]thrift.TProcessorFunction)}
-	self30.processorMap["registerModule"] = &agentProcessorRegisterModule{handler: handler}
-	self30.processorMap["updateHealthStatus"] = &agentProcessorUpdateHealthStatus{handler: handler}
-	self30.processorMap["updateServerStatus"] = &agentProcessorUpdateServerStatus{handler: handler}
-	self30.processorMap["updateDcStatus"] = &agentProcessorUpdateDcStatus{handler: handler}
-	self30.processorMap["updateNginxStatus"] = &agentProcessorUpdateNginxStatus{handler: handler}
-	self30.processorMap["updateSysInfo"] = &agentProcessorUpdateSysInfo{handler: handler}
-	self30.processorMap["updateInterfaceInfo"] = &agentProcessorUpdateInterfaceInfo{handler: handler}
-	self30.processorMap["updateInterfaceTraffic"] = &agentProcessorUpdateInterfaceTraffic{handler: handler}
-	self30.processorMap["updateInterfaceIpMac"] = &agentProcessorUpdateInterfaceIpMac{handler: handler}
-	self30.processorMap["updateRouteInfo"] = &agentProcessorUpdateRouteInfo{handler: handler}
-	self30.processorMap["updateProcessInfo"] = &agentProcessorUpdateProcessInfo{handler: handler}
-	self30.processorMap["updateIpSecOnlineIp"] = &agentProcessorUpdateIpSecOnlineIp{handler: handler}
-	self30.processorMap["updateMacTable"] = &agentProcessorUpdateMacTable{handler: handler}
-	return self30
+	self41 := &AgentProcessor{handler: handler, processorMap: make(map[string]thrift.TProcessorFunction)}
+	self41.processorMap["registerModule"] = &agentProcessorRegisterModule{handler: handler}
+	self41.processorMap["updateHealthStatus"] = &agentProcessorUpdateHealthStatus{handler: handler}
+	self41.processorMap["updateServerStatus"] = &agentProcessorUpdateServerStatus{handler: handler}
+	self41.processorMap["updateDcStatus"] = &agentProcessorUpdateDcStatus{handler: handler}
+	self41.processorMap["updateNginxStatus"] = &agentProcessorUpdateNginxStatus{handler: handler}
+	self41.processorMap["updateSysInfo"] = &agentProcessorUpdateSysInfo{handler: handler}
+	self41.processorMap["updateInterfaceInfo"] = &agentProcessorUpdateInterfaceInfo{handler: handler}
+	self41.processorMap["updateInterfaceTraffic"] = &agentProcessorUpdateInterfaceTraffic{handler: handler}
+	self41.processorMap["updateInterfaceIpMac"] = &agentProcessorUpdateInterfaceIpMac{handler: handler}
+	self41.processorMap["updateRouteInfo"] = &agentProcessorUpdateRouteInfo{handler: handler}
+	self41.processorMap["updateProcessInfo"] = &agentProcessorUpdateProcessInfo{handler: handler}
+	self41.processorMap["updateIpSecOnlineIp"] = &agentProcessorUpdateIpSecOnlineIp{handler: handler}
+	self41.processorMap["updateMacTable"] = &agentProcessorUpdateMacTable{handler: handler}
+	self41.processorMap["registerDialModule"] = &agentProcessorRegisterDialModule{handler: handler}
+	self41.processorMap["unRegisterDialModule"] = &agentProcessorUnRegisterDialModule{handler: handler}
+	self41.processorMap["heartBeat"] = &agentProcessorHeartBeat{handler: handler}
+	return self41
 }
 
 func (p *AgentProcessor) Process(iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
@@ -1206,12 +1467,12 @@ func (p *AgentProcessor) Process(iprot, oprot thrift.TProtocol) (success bool, e
 	}
 	iprot.Skip(thrift.STRUCT)
 	iprot.ReadMessageEnd()
-	x31 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function "+name)
+	x42 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function "+name)
 	oprot.WriteMessageBegin(name, thrift.EXCEPTION, seqId)
-	x31.Write(oprot)
+	x42.Write(oprot)
 	oprot.WriteMessageEnd()
 	oprot.Flush()
-	return false, x31
+	return false, x42
 
 }
 
@@ -1904,6 +2165,165 @@ func (p *agentProcessorUpdateMacTable) Process(seqId int32, iprot, oprot thrift.
 	return true, err
 }
 
+type agentProcessorRegisterDialModule struct {
+	handler Agent
+}
+
+func (p *agentProcessorRegisterDialModule) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
+	args := AgentRegisterDialModuleArgs{}
+	if err = args.Read(iprot); err != nil {
+		iprot.ReadMessageEnd()
+		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
+		oprot.WriteMessageBegin("registerDialModule", thrift.EXCEPTION, seqId)
+		x.Write(oprot)
+		oprot.WriteMessageEnd()
+		oprot.Flush()
+		return false, err
+	}
+
+	iprot.ReadMessageEnd()
+	result := AgentRegisterDialModuleResult{}
+	var retval RetCode
+	var err2 error
+	if retval, err2 = p.handler.RegisterDialModule(args.ModuleId, args.IP, args.Port); err2 != nil {
+		switch v := err2.(type) {
+		case *Xception:
+			result.Ex = v
+		default:
+			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing registerDialModule: "+err2.Error())
+			oprot.WriteMessageBegin("registerDialModule", thrift.EXCEPTION, seqId)
+			x.Write(oprot)
+			oprot.WriteMessageEnd()
+			oprot.Flush()
+			return true, err2
+		}
+	} else {
+		result.Success = &retval
+	}
+	if err2 = oprot.WriteMessageBegin("registerDialModule", thrift.REPLY, seqId); err2 != nil {
+		err = err2
+	}
+	if err2 = result.Write(oprot); err == nil && err2 != nil {
+		err = err2
+	}
+	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
+		err = err2
+	}
+	if err2 = oprot.Flush(); err == nil && err2 != nil {
+		err = err2
+	}
+	if err != nil {
+		return
+	}
+	return true, err
+}
+
+type agentProcessorUnRegisterDialModule struct {
+	handler Agent
+}
+
+func (p *agentProcessorUnRegisterDialModule) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
+	args := AgentUnRegisterDialModuleArgs{}
+	if err = args.Read(iprot); err != nil {
+		iprot.ReadMessageEnd()
+		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
+		oprot.WriteMessageBegin("unRegisterDialModule", thrift.EXCEPTION, seqId)
+		x.Write(oprot)
+		oprot.WriteMessageEnd()
+		oprot.Flush()
+		return false, err
+	}
+
+	iprot.ReadMessageEnd()
+	result := AgentUnRegisterDialModuleResult{}
+	var retval RetCode
+	var err2 error
+	if retval, err2 = p.handler.UnRegisterDialModule(args.ModuleId); err2 != nil {
+		switch v := err2.(type) {
+		case *Xception:
+			result.Ex = v
+		default:
+			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing unRegisterDialModule: "+err2.Error())
+			oprot.WriteMessageBegin("unRegisterDialModule", thrift.EXCEPTION, seqId)
+			x.Write(oprot)
+			oprot.WriteMessageEnd()
+			oprot.Flush()
+			return true, err2
+		}
+	} else {
+		result.Success = &retval
+	}
+	if err2 = oprot.WriteMessageBegin("unRegisterDialModule", thrift.REPLY, seqId); err2 != nil {
+		err = err2
+	}
+	if err2 = result.Write(oprot); err == nil && err2 != nil {
+		err = err2
+	}
+	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
+		err = err2
+	}
+	if err2 = oprot.Flush(); err == nil && err2 != nil {
+		err = err2
+	}
+	if err != nil {
+		return
+	}
+	return true, err
+}
+
+type agentProcessorHeartBeat struct {
+	handler Agent
+}
+
+func (p *agentProcessorHeartBeat) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
+	args := AgentHeartBeatArgs{}
+	if err = args.Read(iprot); err != nil {
+		iprot.ReadMessageEnd()
+		x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.Error())
+		oprot.WriteMessageBegin("heartBeat", thrift.EXCEPTION, seqId)
+		x.Write(oprot)
+		oprot.WriteMessageEnd()
+		oprot.Flush()
+		return false, err
+	}
+
+	iprot.ReadMessageEnd()
+	result := AgentHeartBeatResult{}
+	var retval RetCode
+	var err2 error
+	if retval, err2 = p.handler.HeartBeat(args.ModuleId); err2 != nil {
+		switch v := err2.(type) {
+		case *Xception:
+			result.Ex = v
+		default:
+			x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing heartBeat: "+err2.Error())
+			oprot.WriteMessageBegin("heartBeat", thrift.EXCEPTION, seqId)
+			x.Write(oprot)
+			oprot.WriteMessageEnd()
+			oprot.Flush()
+			return true, err2
+		}
+	} else {
+		result.Success = &retval
+	}
+	if err2 = oprot.WriteMessageBegin("heartBeat", thrift.REPLY, seqId); err2 != nil {
+		err = err2
+	}
+	if err2 = result.Write(oprot); err == nil && err2 != nil {
+		err = err2
+	}
+	if err2 = oprot.WriteMessageEnd(); err == nil && err2 != nil {
+		err = err2
+	}
+	if err2 = oprot.Flush(); err == nil && err2 != nil {
+		err = err2
+	}
+	if err != nil {
+		return
+	}
+	return true, err
+}
+
 // HELPER FUNCTIONS AND STRUCTURES
 
 // Attributes:
@@ -2200,11 +2620,11 @@ func (p *AgentUpdateHealthStatusArgs) readField1(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialHealthResult_, 0, size)
 	p.Results = tSlice
 	for i := 0; i < size; i++ {
-		_elem32 := &DialHealthResult_{}
-		if err := _elem32.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem32), err)
+		_elem43 := &DialHealthResult_{}
+		if err := _elem43.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem43), err)
 		}
-		p.Results = append(p.Results, _elem32)
+		p.Results = append(p.Results, _elem43)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -2458,11 +2878,11 @@ func (p *AgentUpdateServerStatusArgs) readField1(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialServerResult_, 0, size)
 	p.Results = tSlice
 	for i := 0; i < size; i++ {
-		_elem33 := &DialServerResult_{}
-		if err := _elem33.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem33), err)
+		_elem44 := &DialServerResult_{}
+		if err := _elem44.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem44), err)
 		}
-		p.Results = append(p.Results, _elem33)
+		p.Results = append(p.Results, _elem44)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -2716,11 +3136,11 @@ func (p *AgentUpdateDcStatusArgs) readField1(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialDcResult_, 0, size)
 	p.Results = tSlice
 	for i := 0; i < size; i++ {
-		_elem34 := &DialDcResult_{}
-		if err := _elem34.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem34), err)
+		_elem45 := &DialDcResult_{}
+		if err := _elem45.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem45), err)
 		}
-		p.Results = append(p.Results, _elem34)
+		p.Results = append(p.Results, _elem45)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -2974,11 +3394,11 @@ func (p *AgentUpdateNginxStatusArgs) readField1(iprot thrift.TProtocol) error {
 	tSlice := make([]*DialNginxResult_, 0, size)
 	p.Results = tSlice
 	for i := 0; i < size; i++ {
-		_elem35 := &DialNginxResult_{}
-		if err := _elem35.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem35), err)
+		_elem46 := &DialNginxResult_{}
+		if err := _elem46.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem46), err)
 		}
-		p.Results = append(p.Results, _elem35)
+		p.Results = append(p.Results, _elem46)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -3533,11 +3953,11 @@ func (p *AgentUpdateInterfaceInfoArgs) readField2(iprot thrift.TProtocol) error 
 	tSlice := make([]*InterfaceInfo, 0, size)
 	p.Interfaces = tSlice
 	for i := 0; i < size; i++ {
-		_elem36 := &InterfaceInfo{}
-		if err := _elem36.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem36), err)
+		_elem47 := &InterfaceInfo{}
+		if err := _elem47.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem47), err)
 		}
-		p.Interfaces = append(p.Interfaces, _elem36)
+		p.Interfaces = append(p.Interfaces, _elem47)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -3826,11 +4246,11 @@ func (p *AgentUpdateInterfaceTrafficArgs) readField2(iprot thrift.TProtocol) err
 	tSlice := make([]*InterfaceTraffic, 0, size)
 	p.Traffic = tSlice
 	for i := 0; i < size; i++ {
-		_elem37 := &InterfaceTraffic{}
-		if err := _elem37.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem37), err)
+		_elem48 := &InterfaceTraffic{}
+		if err := _elem48.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem48), err)
 		}
-		p.Traffic = append(p.Traffic, _elem37)
+		p.Traffic = append(p.Traffic, _elem48)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -4119,11 +4539,11 @@ func (p *AgentUpdateInterfaceIpMacArgs) readField2(iprot thrift.TProtocol) error
 	tSlice := make([]*IpMac, 0, size)
 	p.Ipmac = tSlice
 	for i := 0; i < size; i++ {
-		_elem38 := &IpMac{}
-		if err := _elem38.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem38), err)
+		_elem49 := &IpMac{}
+		if err := _elem49.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem49), err)
 		}
-		p.Ipmac = append(p.Ipmac, _elem38)
+		p.Ipmac = append(p.Ipmac, _elem49)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -4412,11 +4832,11 @@ func (p *AgentUpdateRouteInfoArgs) readField2(iprot thrift.TProtocol) error {
 	tSlice := make([]*RouteInfo, 0, size)
 	p.Routeinfo = tSlice
 	for i := 0; i < size; i++ {
-		_elem39 := &RouteInfo{}
-		if err := _elem39.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem39), err)
+		_elem50 := &RouteInfo{}
+		if err := _elem50.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem50), err)
 		}
-		p.Routeinfo = append(p.Routeinfo, _elem39)
+		p.Routeinfo = append(p.Routeinfo, _elem50)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -4987,11 +5407,11 @@ func (p *AgentUpdateIpSecOnlineIpArgs) readField2(iprot thrift.TProtocol) error 
 	tSlice := make([]*IpAddr, 0, size)
 	p.Iplist = tSlice
 	for i := 0; i < size; i++ {
-		_elem40 := &IpAddr{}
-		if err := _elem40.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem40), err)
+		_elem51 := &IpAddr{}
+		if err := _elem51.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem51), err)
 		}
-		p.Iplist = append(p.Iplist, _elem40)
+		p.Iplist = append(p.Iplist, _elem51)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -5280,11 +5700,11 @@ func (p *AgentUpdateMacTableArgs) readField2(iprot thrift.TProtocol) error {
 	tSlice := make([]*MacTable, 0, size)
 	p.Mactable = tSlice
 	for i := 0; i < size; i++ {
-		_elem41 := &MacTable{}
-		if err := _elem41.Read(iprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem41), err)
+		_elem52 := &MacTable{}
+		if err := _elem52.Read(iprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", _elem52), err)
 		}
-		p.Mactable = append(p.Mactable, _elem41)
+		p.Mactable = append(p.Mactable, _elem52)
 	}
 	if err := iprot.ReadListEnd(); err != nil {
 		return thrift.PrependError("error reading list end: ", err)
@@ -5498,4 +5918,799 @@ func (p *AgentUpdateMacTableResult) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("AgentUpdateMacTableResult(%+v)", *p)
+}
+
+// Attributes:
+//  - ModuleId
+//  - IP
+//  - Port
+type AgentRegisterDialModuleArgs struct {
+	ModuleId int32   `thrift:"moduleId,1" json:"moduleId"`
+	IP       *IpAddr `thrift:"ip,2" json:"ip"`
+	Port     int32   `thrift:"port,3" json:"port"`
+}
+
+func NewAgentRegisterDialModuleArgs() *AgentRegisterDialModuleArgs {
+	return &AgentRegisterDialModuleArgs{}
+}
+
+func (p *AgentRegisterDialModuleArgs) GetModuleId() int32 {
+	return p.ModuleId
+}
+
+var AgentRegisterDialModuleArgs_IP_DEFAULT *IpAddr
+
+func (p *AgentRegisterDialModuleArgs) GetIP() *IpAddr {
+	if !p.IsSetIP() {
+		return AgentRegisterDialModuleArgs_IP_DEFAULT
+	}
+	return p.IP
+}
+
+func (p *AgentRegisterDialModuleArgs) GetPort() int32 {
+	return p.Port
+}
+func (p *AgentRegisterDialModuleArgs) IsSetIP() bool {
+	return p.IP != nil
+}
+
+func (p *AgentRegisterDialModuleArgs) Read(iprot thrift.TProtocol) error {
+	if _, err := iprot.ReadStructBegin(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+		if err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 1:
+			if err := p.readField1(iprot); err != nil {
+				return err
+			}
+		case 2:
+			if err := p.readField2(iprot); err != nil {
+				return err
+			}
+		case 3:
+			if err := p.readField3(iprot); err != nil {
+				return err
+			}
+		default:
+			if err := iprot.Skip(fieldTypeId); err != nil {
+				return err
+			}
+		}
+		if err := iprot.ReadFieldEnd(); err != nil {
+			return err
+		}
+	}
+	if err := iprot.ReadStructEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleArgs) readField1(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 1: ", err)
+	} else {
+		p.ModuleId = v
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleArgs) readField2(iprot thrift.TProtocol) error {
+	p.IP = &IpAddr{}
+	if err := p.IP.Read(iprot); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.IP), err)
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleArgs) readField3(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 3: ", err)
+	} else {
+		p.Port = v
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleArgs) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("registerDialModule_args"); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+	}
+	if err := p.writeField1(oprot); err != nil {
+		return err
+	}
+	if err := p.writeField2(oprot); err != nil {
+		return err
+	}
+	if err := p.writeField3(oprot); err != nil {
+		return err
+	}
+	if err := oprot.WriteFieldStop(); err != nil {
+		return thrift.PrependError("write field stop error: ", err)
+	}
+	if err := oprot.WriteStructEnd(); err != nil {
+		return thrift.PrependError("write struct stop error: ", err)
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleArgs) writeField1(oprot thrift.TProtocol) (err error) {
+	if err := oprot.WriteFieldBegin("moduleId", thrift.I32, 1); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:moduleId: ", p), err)
+	}
+	if err := oprot.WriteI32(int32(p.ModuleId)); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T.moduleId (1) field write error: ", p), err)
+	}
+	if err := oprot.WriteFieldEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:moduleId: ", p), err)
+	}
+	return err
+}
+
+func (p *AgentRegisterDialModuleArgs) writeField2(oprot thrift.TProtocol) (err error) {
+	if err := oprot.WriteFieldBegin("ip", thrift.STRUCT, 2); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field begin error 2:ip: ", p), err)
+	}
+	if err := p.IP.Write(oprot); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.IP), err)
+	}
+	if err := oprot.WriteFieldEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field end error 2:ip: ", p), err)
+	}
+	return err
+}
+
+func (p *AgentRegisterDialModuleArgs) writeField3(oprot thrift.TProtocol) (err error) {
+	if err := oprot.WriteFieldBegin("port", thrift.I32, 3); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field begin error 3:port: ", p), err)
+	}
+	if err := oprot.WriteI32(int32(p.Port)); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T.port (3) field write error: ", p), err)
+	}
+	if err := oprot.WriteFieldEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field end error 3:port: ", p), err)
+	}
+	return err
+}
+
+func (p *AgentRegisterDialModuleArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("AgentRegisterDialModuleArgs(%+v)", *p)
+}
+
+// Attributes:
+//  - Success
+//  - Ex
+type AgentRegisterDialModuleResult struct {
+	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
+	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
+}
+
+func NewAgentRegisterDialModuleResult() *AgentRegisterDialModuleResult {
+	return &AgentRegisterDialModuleResult{}
+}
+
+var AgentRegisterDialModuleResult_Success_DEFAULT RetCode
+
+func (p *AgentRegisterDialModuleResult) GetSuccess() RetCode {
+	if !p.IsSetSuccess() {
+		return AgentRegisterDialModuleResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+
+var AgentRegisterDialModuleResult_Ex_DEFAULT *Xception
+
+func (p *AgentRegisterDialModuleResult) GetEx() *Xception {
+	if !p.IsSetEx() {
+		return AgentRegisterDialModuleResult_Ex_DEFAULT
+	}
+	return p.Ex
+}
+func (p *AgentRegisterDialModuleResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *AgentRegisterDialModuleResult) IsSetEx() bool {
+	return p.Ex != nil
+}
+
+func (p *AgentRegisterDialModuleResult) Read(iprot thrift.TProtocol) error {
+	if _, err := iprot.ReadStructBegin(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+		if err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 0:
+			if err := p.readField0(iprot); err != nil {
+				return err
+			}
+		case 1:
+			if err := p.readField1(iprot); err != nil {
+				return err
+			}
+		default:
+			if err := iprot.Skip(fieldTypeId); err != nil {
+				return err
+			}
+		}
+		if err := iprot.ReadFieldEnd(); err != nil {
+			return err
+		}
+	}
+	if err := iprot.ReadStructEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleResult) readField0(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 0: ", err)
+	} else {
+		temp := RetCode(v)
+		p.Success = &temp
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleResult) readField1(iprot thrift.TProtocol) error {
+	p.Ex = &Xception{}
+	if err := p.Ex.Read(iprot); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleResult) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("registerDialModule_result"); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+	}
+	if err := p.writeField0(oprot); err != nil {
+		return err
+	}
+	if err := p.writeField1(oprot); err != nil {
+		return err
+	}
+	if err := oprot.WriteFieldStop(); err != nil {
+		return thrift.PrependError("write field stop error: ", err)
+	}
+	if err := oprot.WriteStructEnd(); err != nil {
+		return thrift.PrependError("write struct stop error: ", err)
+	}
+	return nil
+}
+
+func (p *AgentRegisterDialModuleResult) writeField0(oprot thrift.TProtocol) (err error) {
+	if p.IsSetSuccess() {
+		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
+		}
+		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
+		}
+		if err := oprot.WriteFieldEnd(); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
+		}
+	}
+	return err
+}
+
+func (p *AgentRegisterDialModuleResult) writeField1(oprot thrift.TProtocol) (err error) {
+	if p.IsSetEx() {
+		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
+		}
+		if err := p.Ex.Write(oprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
+		}
+		if err := oprot.WriteFieldEnd(); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
+		}
+	}
+	return err
+}
+
+func (p *AgentRegisterDialModuleResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("AgentRegisterDialModuleResult(%+v)", *p)
+}
+
+// Attributes:
+//  - ModuleId
+type AgentUnRegisterDialModuleArgs struct {
+	ModuleId int32 `thrift:"moduleId,1" json:"moduleId"`
+}
+
+func NewAgentUnRegisterDialModuleArgs() *AgentUnRegisterDialModuleArgs {
+	return &AgentUnRegisterDialModuleArgs{}
+}
+
+func (p *AgentUnRegisterDialModuleArgs) GetModuleId() int32 {
+	return p.ModuleId
+}
+func (p *AgentUnRegisterDialModuleArgs) Read(iprot thrift.TProtocol) error {
+	if _, err := iprot.ReadStructBegin(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+		if err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 1:
+			if err := p.readField1(iprot); err != nil {
+				return err
+			}
+		default:
+			if err := iprot.Skip(fieldTypeId); err != nil {
+				return err
+			}
+		}
+		if err := iprot.ReadFieldEnd(); err != nil {
+			return err
+		}
+	}
+	if err := iprot.ReadStructEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleArgs) readField1(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 1: ", err)
+	} else {
+		p.ModuleId = v
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleArgs) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("unRegisterDialModule_args"); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+	}
+	if err := p.writeField1(oprot); err != nil {
+		return err
+	}
+	if err := oprot.WriteFieldStop(); err != nil {
+		return thrift.PrependError("write field stop error: ", err)
+	}
+	if err := oprot.WriteStructEnd(); err != nil {
+		return thrift.PrependError("write struct stop error: ", err)
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleArgs) writeField1(oprot thrift.TProtocol) (err error) {
+	if err := oprot.WriteFieldBegin("moduleId", thrift.I32, 1); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:moduleId: ", p), err)
+	}
+	if err := oprot.WriteI32(int32(p.ModuleId)); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T.moduleId (1) field write error: ", p), err)
+	}
+	if err := oprot.WriteFieldEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:moduleId: ", p), err)
+	}
+	return err
+}
+
+func (p *AgentUnRegisterDialModuleArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("AgentUnRegisterDialModuleArgs(%+v)", *p)
+}
+
+// Attributes:
+//  - Success
+//  - Ex
+type AgentUnRegisterDialModuleResult struct {
+	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
+	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
+}
+
+func NewAgentUnRegisterDialModuleResult() *AgentUnRegisterDialModuleResult {
+	return &AgentUnRegisterDialModuleResult{}
+}
+
+var AgentUnRegisterDialModuleResult_Success_DEFAULT RetCode
+
+func (p *AgentUnRegisterDialModuleResult) GetSuccess() RetCode {
+	if !p.IsSetSuccess() {
+		return AgentUnRegisterDialModuleResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+
+var AgentUnRegisterDialModuleResult_Ex_DEFAULT *Xception
+
+func (p *AgentUnRegisterDialModuleResult) GetEx() *Xception {
+	if !p.IsSetEx() {
+		return AgentUnRegisterDialModuleResult_Ex_DEFAULT
+	}
+	return p.Ex
+}
+func (p *AgentUnRegisterDialModuleResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *AgentUnRegisterDialModuleResult) IsSetEx() bool {
+	return p.Ex != nil
+}
+
+func (p *AgentUnRegisterDialModuleResult) Read(iprot thrift.TProtocol) error {
+	if _, err := iprot.ReadStructBegin(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+		if err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 0:
+			if err := p.readField0(iprot); err != nil {
+				return err
+			}
+		case 1:
+			if err := p.readField1(iprot); err != nil {
+				return err
+			}
+		default:
+			if err := iprot.Skip(fieldTypeId); err != nil {
+				return err
+			}
+		}
+		if err := iprot.ReadFieldEnd(); err != nil {
+			return err
+		}
+	}
+	if err := iprot.ReadStructEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleResult) readField0(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 0: ", err)
+	} else {
+		temp := RetCode(v)
+		p.Success = &temp
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleResult) readField1(iprot thrift.TProtocol) error {
+	p.Ex = &Xception{}
+	if err := p.Ex.Read(iprot); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleResult) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("unRegisterDialModule_result"); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+	}
+	if err := p.writeField0(oprot); err != nil {
+		return err
+	}
+	if err := p.writeField1(oprot); err != nil {
+		return err
+	}
+	if err := oprot.WriteFieldStop(); err != nil {
+		return thrift.PrependError("write field stop error: ", err)
+	}
+	if err := oprot.WriteStructEnd(); err != nil {
+		return thrift.PrependError("write struct stop error: ", err)
+	}
+	return nil
+}
+
+func (p *AgentUnRegisterDialModuleResult) writeField0(oprot thrift.TProtocol) (err error) {
+	if p.IsSetSuccess() {
+		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
+		}
+		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
+		}
+		if err := oprot.WriteFieldEnd(); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
+		}
+	}
+	return err
+}
+
+func (p *AgentUnRegisterDialModuleResult) writeField1(oprot thrift.TProtocol) (err error) {
+	if p.IsSetEx() {
+		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
+		}
+		if err := p.Ex.Write(oprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
+		}
+		if err := oprot.WriteFieldEnd(); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
+		}
+	}
+	return err
+}
+
+func (p *AgentUnRegisterDialModuleResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("AgentUnRegisterDialModuleResult(%+v)", *p)
+}
+
+// Attributes:
+//  - ModuleId
+type AgentHeartBeatArgs struct {
+	ModuleId int32 `thrift:"moduleId,1" json:"moduleId"`
+}
+
+func NewAgentHeartBeatArgs() *AgentHeartBeatArgs {
+	return &AgentHeartBeatArgs{}
+}
+
+func (p *AgentHeartBeatArgs) GetModuleId() int32 {
+	return p.ModuleId
+}
+func (p *AgentHeartBeatArgs) Read(iprot thrift.TProtocol) error {
+	if _, err := iprot.ReadStructBegin(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+		if err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 1:
+			if err := p.readField1(iprot); err != nil {
+				return err
+			}
+		default:
+			if err := iprot.Skip(fieldTypeId); err != nil {
+				return err
+			}
+		}
+		if err := iprot.ReadFieldEnd(); err != nil {
+			return err
+		}
+	}
+	if err := iprot.ReadStructEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatArgs) readField1(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 1: ", err)
+	} else {
+		p.ModuleId = v
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatArgs) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("heartBeat_args"); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+	}
+	if err := p.writeField1(oprot); err != nil {
+		return err
+	}
+	if err := oprot.WriteFieldStop(); err != nil {
+		return thrift.PrependError("write field stop error: ", err)
+	}
+	if err := oprot.WriteStructEnd(); err != nil {
+		return thrift.PrependError("write struct stop error: ", err)
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatArgs) writeField1(oprot thrift.TProtocol) (err error) {
+	if err := oprot.WriteFieldBegin("moduleId", thrift.I32, 1); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:moduleId: ", p), err)
+	}
+	if err := oprot.WriteI32(int32(p.ModuleId)); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T.moduleId (1) field write error: ", p), err)
+	}
+	if err := oprot.WriteFieldEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write field end error 1:moduleId: ", p), err)
+	}
+	return err
+}
+
+func (p *AgentHeartBeatArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("AgentHeartBeatArgs(%+v)", *p)
+}
+
+// Attributes:
+//  - Success
+//  - Ex
+type AgentHeartBeatResult struct {
+	Success *RetCode  `thrift:"success,0" json:"success,omitempty"`
+	Ex      *Xception `thrift:"ex,1" json:"ex,omitempty"`
+}
+
+func NewAgentHeartBeatResult() *AgentHeartBeatResult {
+	return &AgentHeartBeatResult{}
+}
+
+var AgentHeartBeatResult_Success_DEFAULT RetCode
+
+func (p *AgentHeartBeatResult) GetSuccess() RetCode {
+	if !p.IsSetSuccess() {
+		return AgentHeartBeatResult_Success_DEFAULT
+	}
+	return *p.Success
+}
+
+var AgentHeartBeatResult_Ex_DEFAULT *Xception
+
+func (p *AgentHeartBeatResult) GetEx() *Xception {
+	if !p.IsSetEx() {
+		return AgentHeartBeatResult_Ex_DEFAULT
+	}
+	return p.Ex
+}
+func (p *AgentHeartBeatResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *AgentHeartBeatResult) IsSetEx() bool {
+	return p.Ex != nil
+}
+
+func (p *AgentHeartBeatResult) Read(iprot thrift.TProtocol) error {
+	if _, err := iprot.ReadStructBegin(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+		if err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T field %d read error: ", p, fieldId), err)
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 0:
+			if err := p.readField0(iprot); err != nil {
+				return err
+			}
+		case 1:
+			if err := p.readField1(iprot); err != nil {
+				return err
+			}
+		default:
+			if err := iprot.Skip(fieldTypeId); err != nil {
+				return err
+			}
+		}
+		if err := iprot.ReadFieldEnd(); err != nil {
+			return err
+		}
+	}
+	if err := iprot.ReadStructEnd(); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatResult) readField0(iprot thrift.TProtocol) error {
+	if v, err := iprot.ReadI32(); err != nil {
+		return thrift.PrependError("error reading field 0: ", err)
+	} else {
+		temp := RetCode(v)
+		p.Success = &temp
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatResult) readField1(iprot thrift.TProtocol) error {
+	p.Ex = &Xception{}
+	if err := p.Ex.Read(iprot); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Ex), err)
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatResult) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("heartBeat_result"); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+	}
+	if err := p.writeField0(oprot); err != nil {
+		return err
+	}
+	if err := p.writeField1(oprot); err != nil {
+		return err
+	}
+	if err := oprot.WriteFieldStop(); err != nil {
+		return thrift.PrependError("write field stop error: ", err)
+	}
+	if err := oprot.WriteStructEnd(); err != nil {
+		return thrift.PrependError("write struct stop error: ", err)
+	}
+	return nil
+}
+
+func (p *AgentHeartBeatResult) writeField0(oprot thrift.TProtocol) (err error) {
+	if p.IsSetSuccess() {
+		if err := oprot.WriteFieldBegin("success", thrift.I32, 0); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 0:success: ", p), err)
+		}
+		if err := oprot.WriteI32(int32(*p.Success)); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T.success (0) field write error: ", p), err)
+		}
+		if err := oprot.WriteFieldEnd(); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 0:success: ", p), err)
+		}
+	}
+	return err
+}
+
+func (p *AgentHeartBeatResult) writeField1(oprot thrift.TProtocol) (err error) {
+	if p.IsSetEx() {
+		if err := oprot.WriteFieldBegin("ex", thrift.STRUCT, 1); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:ex: ", p), err)
+		}
+		if err := p.Ex.Write(oprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Ex), err)
+		}
+		if err := oprot.WriteFieldEnd(); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 1:ex: ", p), err)
+		}
+	}
+	return err
+}
+
+func (p *AgentHeartBeatResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("AgentHeartBeatResult(%+v)", *p)
 }

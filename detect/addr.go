@@ -2,12 +2,13 @@ package detect
 
 import (
 	"bytes"
+	"dial/base"
 	"dial/gen-go/rpc/dial/yamutech/com"
 	"encoding/binary"
 	"fmt"
 	"github.com/tatsushid/go-fastping"
 	"net"
-	//"sync"
+	"sync"
 	"time"
 )
 
@@ -41,31 +42,25 @@ func Uint32ToString(ipnr uint32) string {
 	return net.IPv4(bytes[3], bytes[2], bytes[1], bytes[0]).String()
 }
 
-// 网络地址段探测
-func AddrDetect(ipnet *com.SysIpSec, interval int32) {
-	var (
-		//wg     sync.WaitGroup
-		//mu     sync.Mutex
-		iplist []*com.IpAddr
-	)
+// 地址段在线ip探测 速度较快 适合局域网探测
+func LanDetect(ipnet *com.SysIpSec, interval int32) {
+	// 判断参数是否合法
+	if net.ParseIP(ipnet.Ipsec.IP.Addr) == nil || ipnet.Ipsec.Mask <= 0 || ipnet.Ipsec.Mask > 32 {
+		return
+	}
+	var iplist []*com.IpAddr
+
 	// 计算网段ip区间 使用uint32表示
-	//fmt.Println("ip:", ipnet.Ipsec.IP.Addr, "32-mask:", 32-ipnet.Ipsec.Mask)
 	begin, end := GetAddr(ipnet.Ipsec.IP.Addr, 32-ipnet.Ipsec.Mask)
-	/*
-		fmt.Println("begin:", Uint32ToString(begin))
-		fmt.Println("end:", Uint32ToString(end))
-		fmt.Println("size:", end-begin)
-	*/
+	//fmt.Println("begin:", Uint32ToString(begin),"end:", Uint32ToString(end),"size:", end-begin)
 
 	p := fastping.NewPinger()
 	p.OnRecv = func(ipaddr *net.IPAddr, rtt time.Duration) {
 		//fmt.Printf("IP Addr: %s receive, RTT: %v\n", ipaddr.String(), rtt)
 		addr := &com.IpAddr{Addr: ipaddr.IP.String(), Version: 4}
 		//fmt.Println(addr)
-		//mu.Lock()
 		//ping成功ip加入上报列表iplist
 		iplist = append(iplist, addr)
-		//mu.Unlock()
 	}
 
 	for i := begin; i < end; i++ {
@@ -80,14 +75,113 @@ func AddrDetect(ipnet *com.SysIpSec, interval int32) {
 		if err != nil {
 			return
 		} else {
-			//fmt.Println(len(iplist))
+			fmt.Println(len(iplist))
 			// 上报iplist 先检查原ipsec节点是否存在 不存在直接退出
 		}
 
 		// clear iplist
 		iplist = iplist[:0]
 
-		// interval 为 0 只拨测一次
+		// interval 为 0 只探测一次
+		if interval > 0 {
+			time.Sleep(time.Duration(interval) * time.Second)
+		} else {
+			return
+		}
+	}
+}
+
+// ip段探测 内网外网均可
+func Detect(ipnet *com.SysIpSec, interval int32) {
+	if net.ParseIP(ipnet.Ipsec.IP.Addr) == nil || ipnet.Ipsec.Mask <= 0 || ipnet.Ipsec.Mask > 32 {
+		return
+	}
+	var (
+		iplist []*com.IpAddr
+		wg     sync.WaitGroup
+		mu     sync.Mutex
+	)
+	begin, end := GetAddr(ipnet.Ipsec.IP.Addr, 32-ipnet.Ipsec.Mask)
+	fmt.Println("begin:", Uint32ToString(begin), "end:", Uint32ToString(end), "size:", end-begin)
+
+	addrs := make([]string, 0, end-begin)
+	for i := begin; i < end; i++ {
+		addrs = append(addrs, Uint32ToString(i))
+	}
+	fmt.Println(len(addrs))
+
+	for {
+		for _, v := range addrs {
+			wg.Add(1)
+			go func(ip string) {
+				defer wg.Done()
+				p := fastping.NewPinger()
+				ra, err := net.ResolveIPAddr("ip4:icmp", ip)
+				if err != nil {
+					return
+				}
+				p.AddIPAddr(ra)
+				p.OnRecv = func(addr *net.IPAddr, rtt time.Duration) {
+					host := &com.IpAddr{Addr: ip, Version: 4}
+					mu.Lock()
+					iplist = append(iplist, host)
+					mu.Unlock()
+					return
+				}
+				p.Run()
+			}(v)
+		}
+		wg.Wait()
+		//上报
+		fmt.Println(len(iplist))
+		iplist = iplist[:0]
+		if interval > 0 {
+			time.Sleep(time.Duration(interval) * time.Second)
+		} else {
+			return
+		}
+	}
+}
+
+func NetDetect(ipnet *com.SysIpSec, interval int32) {
+	if net.ParseIP(ipnet.Ipsec.IP.Addr) == nil || ipnet.Ipsec.Mask <= 0 || ipnet.Ipsec.Mask > 32 {
+		return
+	}
+	var (
+		iplist []*com.IpAddr
+		wg     sync.WaitGroup
+		mu     sync.Mutex
+	)
+	begin, end := GetAddr(ipnet.Ipsec.IP.Addr, 32-ipnet.Ipsec.Mask)
+	fmt.Println("begin:", Uint32ToString(begin), "end:", Uint32ToString(end), "size:", end-begin)
+
+	addrs := make([]string, 0, end-begin)
+	for i := begin; i < end; i++ {
+		addrs = append(addrs, Uint32ToString(i))
+	}
+	fmt.Println(len(addrs))
+
+	for {
+		for _, v := range addrs {
+			wg.Add(1)
+			go func(ip string) {
+				defer wg.Done()
+				//fmt.Println(ip)
+				for i := 0; i < 3; i++ {
+					if base.Ping(ip) > 0 {
+						host := &com.IpAddr{Addr: ip, Version: 4}
+						mu.Lock()
+						iplist = append(iplist, host)
+						mu.Unlock()
+						return
+					}
+				}
+			}(v)
+		}
+		wg.Wait()
+		//上报
+		fmt.Println(len(iplist))
+		iplist = iplist[:0]
 		if interval > 0 {
 			time.Sleep(time.Duration(interval) * time.Second)
 		} else {
