@@ -3,6 +3,7 @@ package base
 import (
 	"bytes"
 	"errors"
+	"github.com/tatsushid/go-fastping"
 	"net"
 	"os"
 	"strings"
@@ -181,4 +182,19 @@ func ipv4Payload(b []byte) []byte {
 	}
 	hdrlen := int(b[0]&0x0f) << 2
 	return b[hdrlen:]
+}
+
+func Icmp(ip string) int64 {
+	p := fastping.NewPinger()
+	ra, err := net.ResolveIPAddr("ip4:icmp", ip)
+	if err != nil {
+		return 0
+	}
+	p.AddIPAddr(ra)
+	var delay int64
+	p.OnRecv = func(addr *net.IPAddr, rtt time.Duration) {
+		delay = rtt.Nanoseconds() / 1000
+	}
+	p.Run()
+	return delay
 }

@@ -12,6 +12,19 @@ import (
 	"time"
 )
 
+var IpsecMap map[string]*com.SysIpSec
+
+func AddIpSec(ipsec *com.SysIpSec, interval int32) (r com.RetCode, err error) {
+	IpsecMap[ipsec.RecordId] = ipsec
+	go AddrDetect(ipsec, interval)
+	return com.RetCode_OK, nil
+}
+
+func DelIpSec(ipsecid string) (r com.RetCode, err error) {
+	delete(IpsecMap, ipsecid)
+	return com.RetCode_OK, nil
+}
+
 // 获取地址段开始结束ip  sip：eg 192.168.5.3 mask：eg 24 返回IP段起始结束ip
 func GetAddr(sip string, mask int32) (uint32, uint32) {
 	var hmask uint32 = 1
@@ -43,15 +56,15 @@ func Uint32ToString(ipnr uint32) string {
 }
 
 // 地址段在线ip探测 速度较快 适合局域网探测
-func LanDetect(ipnet *com.SysIpSec, interval int32) {
+func LanDetect(ipsec *com.SysIpSec, interval int32) {
 	// 判断参数是否合法
-	if net.ParseIP(ipnet.Ipsec.IP.Addr) == nil || ipnet.Ipsec.Mask <= 0 || ipnet.Ipsec.Mask > 32 {
+	if net.ParseIP(ipsec.Ipsec.IP.Addr) == nil || ipsec.Ipsec.Mask <= 0 || ipsec.Ipsec.Mask > 32 {
 		return
 	}
 	var iplist []*com.IpAddr
 
 	// 计算网段ip区间 使用uint32表示
-	begin, end := GetAddr(ipnet.Ipsec.IP.Addr, 32-ipnet.Ipsec.Mask)
+	begin, end := GetAddr(ipsec.Ipsec.IP.Addr, 32-ipsec.Ipsec.Mask)
 	//fmt.Println("begin:", Uint32ToString(begin),"end:", Uint32ToString(end),"size:", end-begin)
 
 	p := fastping.NewPinger()
@@ -92,8 +105,8 @@ func LanDetect(ipnet *com.SysIpSec, interval int32) {
 }
 
 // ip段探测 内网外网均可
-func Detect(ipnet *com.SysIpSec, interval int32) {
-	if net.ParseIP(ipnet.Ipsec.IP.Addr) == nil || ipnet.Ipsec.Mask <= 0 || ipnet.Ipsec.Mask > 32 {
+func AddrDetect(ipsec *com.SysIpSec, interval int32) {
+	if net.ParseIP(ipsec.Ipsec.IP.Addr) == nil || ipsec.Ipsec.Mask <= 0 || ipsec.Ipsec.Mask > 32 {
 		return
 	}
 	var (
@@ -101,74 +114,22 @@ func Detect(ipnet *com.SysIpSec, interval int32) {
 		wg     sync.WaitGroup
 		mu     sync.Mutex
 	)
-	begin, end := GetAddr(ipnet.Ipsec.IP.Addr, 32-ipnet.Ipsec.Mask)
-	fmt.Println("begin:", Uint32ToString(begin), "end:", Uint32ToString(end), "size:", end-begin)
+	begin, end := GetAddr(ipsec.Ipsec.IP.Addr, 32-ipsec.Ipsec.Mask)
+	//fmt.Println("begin:", Uint32ToString(begin), "end:", Uint32ToString(end), "size:", end-begin)
 
 	addrs := make([]string, 0, end-begin)
 	for i := begin; i < end; i++ {
 		addrs = append(addrs, Uint32ToString(i))
 	}
-	fmt.Println(len(addrs))
 
 	for {
 		for _, v := range addrs {
 			wg.Add(1)
 			go func(ip string) {
 				defer wg.Done()
-				p := fastping.NewPinger()
-				ra, err := net.ResolveIPAddr("ip4:icmp", ip)
-				if err != nil {
-					return
-				}
-				p.AddIPAddr(ra)
-				p.OnRecv = func(addr *net.IPAddr, rtt time.Duration) {
-					host := &com.IpAddr{Addr: ip, Version: 4}
-					mu.Lock()
-					iplist = append(iplist, host)
-					mu.Unlock()
-					return
-				}
-				p.Run()
-			}(v)
-		}
-		wg.Wait()
-		//上报
-		fmt.Println(len(iplist))
-		iplist = iplist[:0]
-		if interval > 0 {
-			time.Sleep(time.Duration(interval) * time.Second)
-		} else {
-			return
-		}
-	}
-}
-
-func NetDetect(ipnet *com.SysIpSec, interval int32) {
-	if net.ParseIP(ipnet.Ipsec.IP.Addr) == nil || ipnet.Ipsec.Mask <= 0 || ipnet.Ipsec.Mask > 32 {
-		return
-	}
-	var (
-		iplist []*com.IpAddr
-		wg     sync.WaitGroup
-		mu     sync.Mutex
-	)
-	begin, end := GetAddr(ipnet.Ipsec.IP.Addr, 32-ipnet.Ipsec.Mask)
-	fmt.Println("begin:", Uint32ToString(begin), "end:", Uint32ToString(end), "size:", end-begin)
-
-	addrs := make([]string, 0, end-begin)
-	for i := begin; i < end; i++ {
-		addrs = append(addrs, Uint32ToString(i))
-	}
-	fmt.Println(len(addrs))
-
-	for {
-		for _, v := range addrs {
-			wg.Add(1)
-			go func(ip string) {
-				defer wg.Done()
-				//fmt.Println(ip)
 				for i := 0; i < 3; i++ {
-					if base.Ping(ip) > 0 {
+					//if base.Ping(ip) > 0 {
+					if base.Icmp(ip) > 0 {
 						host := &com.IpAddr{Addr: ip, Version: 4}
 						mu.Lock()
 						iplist = append(iplist, host)
@@ -179,6 +140,13 @@ func NetDetect(ipnet *com.SysIpSec, interval int32) {
 			}(v)
 		}
 		wg.Wait()
+
+		/*
+			if _, ok := IpsecMap[ipsec.RecordId]; !ok {
+				return
+			}
+		*/
+
 		//上报
 		fmt.Println(len(iplist))
 		iplist = iplist[:0]
