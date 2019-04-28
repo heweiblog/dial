@@ -12,12 +12,24 @@ import (
 	"time"
 )
 
-var IpsecMap map[string]*com.SysIpSec
+type Ipsec struct {
+	Ipsec    *com.SysIpSec
+	Interval int32
+}
+
+var IpsecMap map[string]*Ipsec
+
+func init() {
+	IpsecMap = make(map[string]*Ipsec)
+}
 
 func AddIpSec(ipsec *com.SysIpSec, interval int32) (r com.RetCode, err error) {
-	IpsecMap[ipsec.RecordId] = ipsec
-	go AddrDetect(ipsec, interval)
-	return com.RetCode_OK, nil
+	IpsecMap[ipsec.RecordId] = &Ipsec{Ipsec: ipsec, Interval: interval}
+	if elem, ok := IpsecMap[ipsec.RecordId]; ok {
+		go IpsecDetect(ipsec.RecordId, elem)
+		return com.RetCode_OK, nil
+	}
+	return com.RetCode_FAIL, nil
 }
 
 func DelIpSec(ipsecid string) (r com.RetCode, err error) {
@@ -155,5 +167,56 @@ func AddrDetect(ipsec *com.SysIpSec, interval int32) {
 		} else {
 			return
 		}
+	}
+}
+
+func IpsecDetect(id string, ipsec *Ipsec) {
+
+	if net.ParseIP(ipsec.Ipsec.Ipsec.IP.Addr) == nil || ipsec.Ipsec.Ipsec.Mask <= 0 || ipsec.Ipsec.Ipsec.Mask > 32 {
+		return
+	}
+	var (
+		iplist []*com.IpAddr
+		wg     sync.WaitGroup
+		mu     sync.Mutex
+	)
+	begin, end := GetAddr(ipsec.Ipsec.Ipsec.IP.Addr, 32-ipsec.Ipsec.Ipsec.Mask)
+	fmt.Println("begin:", Uint32ToString(begin), "end:", Uint32ToString(end), "size:", end-begin)
+
+	addrs := make([]string, 0, end-begin)
+	for i := begin; i < end; i++ {
+		addrs = append(addrs, Uint32ToString(i))
+	}
+
+	for {
+		for _, v := range addrs {
+			wg.Add(1)
+			go func(ip string) {
+				defer wg.Done()
+				//for i := 0; i < 3; i++ {
+				//if base.Ping(ip) > 0 {
+				if base.Icmp(ip) > 0 {
+					host := &com.IpAddr{Addr: ip, Version: 4}
+					mu.Lock()
+					iplist = append(iplist, host)
+					mu.Unlock()
+					return
+				}
+				//}
+			}(v)
+		}
+		wg.Wait()
+
+		elem, ok := IpsecMap[id]
+		if ok && elem == ipsec {
+			//上报
+			fmt.Println(len(iplist))
+		} else {
+			fmt.Println(id, "not exist")
+			//return
+		}
+
+		iplist = iplist[:0]
+		time.Sleep(time.Duration(ipsec.Interval) * time.Second)
 	}
 }
