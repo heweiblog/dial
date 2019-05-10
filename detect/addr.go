@@ -27,6 +27,7 @@ func AddIpSec(ipsec *com.SysIpSec, interval int32) (r com.RetCode, err error) {
 	IpsecMap[ipsec.RecordId] = &Ipsec{Ipsec: ipsec, Interval: interval}
 	if elem, ok := IpsecMap[ipsec.RecordId]; ok {
 		go IpsecDetect(ipsec.RecordId, elem)
+		Conf.Println(ipsec)
 		return com.RetCode_OK, nil
 	}
 	return com.RetCode_FAIL, nil
@@ -213,7 +214,7 @@ func IpsecDetect(id string, ipsec *Ipsec) {
 			fmt.Println(len(iplist))
 		} else {
 			fmt.Println(id, "not exist")
-			//return
+			return
 		}
 
 		iplist = iplist[:0]

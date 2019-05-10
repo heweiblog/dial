@@ -5,9 +5,9 @@ import (
 )
 
 type Conf struct {
-	DialPort    int
+	DialPort    string
 	DialIp      string
-	AgentPort   int
+	AgentPort   string
 	AgentIp     string
 	Health      int
 	DelayWeight int
@@ -24,15 +24,12 @@ var Cfg *Conf
 
 func NewConf() *Conf {
 	return &Conf{
-		DialPort:    9092,
-		AgentPort:   9294,
 		Health:      5000,
 		DelayWeight: 100,
 		LostWeight:  2000,
 		Count:       5,
 		Timeout:     2,
 		Interval:    10,
-		Dname:       "www.baidu.com",
 	}
 }
 
@@ -40,5 +37,8 @@ func init() {
 	Cfg = NewConf()
 	conf := goini.SetConfig(CONFPATH)
 	Cfg.DialIp = conf.GetValue("dial", "ip")
+	Cfg.DialPort = conf.GetValue("dial", "port")
 	Cfg.AgentIp = conf.GetValue("agent", "ip")
+	Cfg.AgentPort = conf.GetValue("agent", "port")
+	Cfg.Dname = conf.GetValue("server", "dname")
 }
