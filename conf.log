@@ -1,0 +1,2 @@
+Config:2019/05/14 10:48:28 server.go:17: Dial listen: 127.0.0.1:9092
+Config:2019/05/14 10:48:28 server.go:25: Dial thrift server success in 127.0.0.1:9092

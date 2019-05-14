@@ -3,12 +3,12 @@ package client
 import (
 	"dial/config"
 	"dial/gen-go/rpc/dial/yamutech/com"
-	"fmt"
+	"dial/log"
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"net"
 	"os"
-	"strconv"
 	"sync"
+	"time"
 )
 
 type DialClient struct {
@@ -23,11 +23,10 @@ func init() {
 	Client = &DialClient{}
 	transport, err := thrift.NewTSocket(net.JoinHostPort(config.Cfg.AgentIp, config.Cfg.AgentPort))
 	if err != nil {
-		// log
-		fmt.Println(err)
+		log.Error.Println(err)
 		os.Exit(1)
 	}
-	Client.transport = transport
+	Client.Transport = transport
 	protocolFactory := thrift.NewTBinaryProtocolFactoryDefault()
 	Client.Client = com.NewAgentClientFactory(transport, protocolFactory)
 	Client.Lock = new(sync.Mutex)
@@ -36,7 +35,7 @@ func init() {
 func (c *DialClient) Register() {
 
 	if err := c.Transport.Open(); err != nil {
-		fmt.Println(err)
+		log.Error.Println(err)
 		os.Exit(1)
 	}
 
@@ -44,19 +43,19 @@ func (c *DialClient) Register() {
 
 	ip := com.NewIpAddr()
 	ip.Version = 4
-	ip.Addr = common.AgentIp
+	ip.Addr = config.Cfg.AgentIp
 
 	c.Lock.Lock()
 	for {
 		ret, err := c.Client.RegisterModule(com.ModuleType_DIALING)
 		if ret != com.RetCode_OK || err != nil {
 			time.Sleep(time.Second)
-			fmt.Println(err)
+			log.Error.Println(err)
 			continue
 		}
 		break
 	}
 	c.Lock.Unlock()
 
-	fmt.Println("success register ->", config.Cfg.AgentIp, config.Cfg.AgentPort)
+	log.Cfglog.Println("dial client success register agent->", config.Cfg.AgentIp, config.Cfg.AgentPort)
 }

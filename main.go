@@ -1,8 +1,8 @@
 package main
 
 import (
-	//"dial/client"
 	//"dial/gen-go/rpc/dial/yamutech/com"
+	"dial/client"
 	"dial/log"
 	"dial/server"
 )
@@ -12,6 +12,6 @@ func main() {
 	log.Warning.Printf("飞雪无情的微信公众号：%s\n", "flysnow_org")
 	log.Error.Println("欢迎关注留言")
 
+	go client.Client.Register()
 	server.Server()
-	select {}
 }
