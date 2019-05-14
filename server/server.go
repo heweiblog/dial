@@ -8,10 +8,6 @@ import (
 	"os"
 )
 
-type Hand struct {
-	com.Dial
-}
-
 func Server() {
 
 	log.Cfglog.Println("Dial listen:", config.Cfg.DialIp+":"+config.Cfg.DialPort)
