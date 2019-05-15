@@ -5,12 +5,6 @@ import (
 	"dial/log"
 )
 
-var PolicyMap map[string]*com.HealthPolicyInfo
-
-func init() {
-	PolicyMap = make(map[string]*com.HealthPolicyInfo)
-}
-
 func (h Hand) AddHealthPolicy(policy *com.HealthPolicyInfo) (com.RetCode, error) {
 	PolicyMap[policy.Name] = policy
 	if _, ok := PolicyMap[policy.Name]; ok {

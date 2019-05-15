@@ -15,6 +15,7 @@ type DialClient struct {
 	Client    *com.AgentClient
 	Lock      *sync.Mutex
 	Transport thrift.TTransport
+	Status    bool
 }
 
 var Client *DialClient
@@ -55,6 +56,7 @@ func (c *DialClient) Register() {
 		}
 		break
 	}
+	c.Status = true
 	c.Lock.Unlock()
 
 	log.Cfglog.Println("dial client success register agent->", config.Cfg.AgentIp, config.Cfg.AgentPort)

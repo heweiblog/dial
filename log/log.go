@@ -8,8 +8,8 @@ import (
 const (
 	//const LogFile = "/var/log/dial/dial.log"
 	//const ConfLog = "/var/log/dial/config.log"
-	WorkLog = "./dial.log"
-	ConfLog = "./conf.log"
+	WorkLog = "./log/dial.log"
+	ConfLog = "./log/conf.log"
 )
 
 var (

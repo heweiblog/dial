@@ -9,7 +9,6 @@ import (
 )
 
 func Server() {
-
 	log.Cfglog.Println("Dial listen:", config.Cfg.DialIp+":"+config.Cfg.DialPort)
 	serverTransport, err := thrift.NewTServerSocket(config.Cfg.DialIp + ":" + config.Cfg.DialPort)
 	if err != nil {
