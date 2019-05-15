@@ -34,7 +34,7 @@ func CkeckResponse(resp *http.Response, code int, content string) bool {
 	return true
 }
 
-// http/https get请求 url如http://192.168.5.41:8080/index 返回值:延时
+// http/https get请求 url如https://192.168.5.41:12345/index 返回值:延时
 func HttpGet(url, content string, code int) int64 {
 	c := NewHttpClient()
 

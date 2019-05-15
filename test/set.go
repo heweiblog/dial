@@ -37,4 +37,13 @@ func main() {
 	time.Sleep(time.Second)
 	delete(set, xxx)
 	time.Sleep(time.Second * 5)
+
+	ma := make(map[string]interface{})
+	au := ma["dsf"]
+	fmt.Println("au=", au)
+	if aa, ok := au.(User); ok {
+		fmt.Println("ok", aa)
+	} else {
+		fmt.Println("no", aa)
+	}
 }
