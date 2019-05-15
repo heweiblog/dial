@@ -5,13 +5,34 @@ import (
 	"dial/client"
 	"dial/log"
 	"dial/server"
+	"github.com/sevlyar/go-daemon"
+	"os"
 )
 
 func main() {
-	log.Info.Println("飞雪无情的博客:", "http://www.flysnow.org")
-	log.Warning.Printf("飞雪无情的微信公众号：%s\n", "flysnow_org")
-	log.Error.Println("欢迎关注留言")
+	if 2 == len(os.Args) && os.Args[1] == "-b" {
+		cntxt := &daemon.Context{
+			PidFileName: "dial.pid",
+			PidFilePerm: 0644,
+			LogFileName: "dial.log",
+			LogFilePerm: 0640,
+			WorkDir:     "/var/log/dial",
+			Umask:       027,
+			Args:        []string{"[dial]"},
+		}
 
+		d, err := cntxt.Reborn()
+		if err != nil {
+			log.Error.Println("Unable to run: ", err)
+		}
+		if d != nil {
+			return
+		}
+		defer cntxt.Release()
+	}
+
+	// go server.Work()
 	go client.Client.Register()
 	server.Server()
+	select {}
 }
